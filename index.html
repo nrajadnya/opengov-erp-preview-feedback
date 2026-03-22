@@ -273,12 +273,42 @@
     .insight-item.filled { font-style: normal; color: var(--text-main); }
     .item-dot { flex-shrink: 0; font-size: 12px; margin-top: 2px; }
 
+    /* Floating side nav buttons */
+    .side-nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      width: 48px; height: 64px;
+      display: none;
+      align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.95);
+      border: 1.5px solid var(--border);
+      font-size: 22px;
+      cursor: pointer;
+      transition: all 0.18s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      color: var(--text-main);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .side-nav-btn:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+    .side-nav-btn:not(:disabled):hover { background: var(--og-purple); color: #fff; border-color: var(--og-purple); }
+    .side-nav-btn.left  { left: 0; border-radius: 0 10px 10px 0; border-left: none; }
+    .side-nav-btn.right { right: 0; border-radius: 10px 0 0 10px; border-right: none; }
+    .customer-detail.visible ~ .side-nav-btn,
+    .side-nav-btn.show { display: flex; }
+
     /* Journey nav footer */
     .journey-footer {
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 28px;
       background: #fff; border-top: 1px solid var(--border);
       position: sticky; bottom: 0;
+    }
+    /* On small screens hide the text footer nav labels, rely on side buttons */
+    @media (max-width: 600px) {
+      .journey-footer { padding: 12px 16px; }
+      .jnav-btn { padding: 8px 12px; font-size: 13px; }
     }
     .jnav-btn {
       display: flex; align-items: center; gap: 7px;
@@ -418,6 +448,10 @@
       </div>
 
     </div><!-- /customer-detail -->
+
+    <!-- Floating side nav buttons (visible on all devices once a stop is selected) -->
+    <button class="side-nav-btn left"  id="side-prev" onclick="stepStop(-1)" aria-label="Previous stop">&#8592;</button>
+    <button class="side-nav-btn right" id="side-next" onclick="stepStop(1)"  aria-label="Next stop">&#8594;</button>
 
   </div><!-- /content-area -->
 
@@ -734,6 +768,15 @@ function selectStop(id) {
   nextBtn.disabled = !next;
   prevBtn.innerHTML = prev ? `← ${prev.name}` : '← Previous';
   nextBtn.innerHTML = next ? `${next.name} →` : 'Next →';
+
+  // Sync floating side buttons
+  const sidePrev = document.getElementById('side-prev');
+  const sideNext = document.getElementById('side-next');
+  if (sidePrev && sideNext) {
+    sidePrev.classList.add('show'); sideNext.classList.add('show');
+    sidePrev.disabled = !prev;
+    sideNext.disabled = !next;
+  }
 
   // Draw dotted route from origin to current stop
   updateRouteLine(id);
