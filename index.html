@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>India → US Customer Visit · OpenGov Field Insights 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --og-purple:       #4B3FFF;
+      --og-purple-dark:  #3730c4;
+      --og-purple-light: #ede9ff;
+      --og-orange:       #F86A0B;
+      --og-orange-light: #fff4ec;
+      --og-green:        #17b26a;
+      --og-green-light:  #ecfdf5;
+      --og-amber:        #d97706;
+      --og-amber-light:  #fffbeb;
+      --text-dark:   #111827;
+      --text-main:   #212121;
+      --text-sub:    #686f88;
+      --text-dim:    #9ca3af;
+      --border:      #e5e7eb;
+      --border-soft: #f0f1f3;
+      --bg-white:    #ffffff;
+      --bg-light:    #f8f9fc;
+      --bg-section:  #f0f2fb;
+    }
+
+    html, body {
+      height: 100%; overflow: hidden;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+    }
+
+    /* ── TOP STRIP ── */
+    .top-strip {
+      position: fixed; top: 0; left: 0; right: 0; height: 6px;
+      background: var(--og-purple); z-index: 600;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 6px; left: 0; right: 0; z-index: 500;
+      height: 50px;
+      background: #fff; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .header-brand { display: flex; align-items: center; gap: 10px; }
+    .og-wordmark { font-size: 16px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.3px; }
+    .og-chevron {
+      width: 0; height: 0;
+      border-left: 5px solid transparent; border-right: 5px solid transparent;
+      border-top: 8px solid var(--og-purple); margin-top: 1px;
+    }
+    .hdr-divider { width: 1px; height: 20px; background: var(--border); margin: 0 12px; }
+    .hdr-subtitle { font-size: 12.5px; font-weight: 600; color: var(--text-sub); }
+    .hdr-right { display: flex; align-items: center; gap: 8px; }
+    .hdr-pill {
+      background: var(--og-purple-light); color: var(--og-purple);
+      border-radius: 20px; padding: 4px 13px; font-size: 12px; font-weight: 700;
+    }
+    .hdr-tag {
+      background: var(--bg-section); color: var(--text-sub);
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 4px 12px; font-size: 12px;
+    }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      display: flex; flex-direction: column;
+      height: 100vh; padding-top: 56px; overflow: hidden;
+    }
+
+    /* ── MAP STRIP ── */
+    .map-strip {
+      flex-shrink: 0; position: relative;
+      height: 210px; border-bottom: 1px solid var(--border);
+      transition: height 0.38s cubic-bezier(0.4,0,0.2,1);
+    }
+    .map-strip.expanded { height: 56vh; }
+    #map { width: 100%; height: 100%; }
+    .leaflet-container { height: 100% !important; background: #f8f9fc !important; }
+
+    /* Map expand button */
+    .map-expand-btn {
+      position: absolute; top: 10px; right: 10px; z-index: 450;
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: 8px; padding: 6px 11px;
+      font-size: 12px; font-weight: 600; color: var(--text-sub);
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+      user-select: none;
+    }
+    .map-expand-btn:hover { border-color: var(--og-purple); color: var(--og-purple); }
+    .map-expand-btn svg { transition: transform 0.3s; }
+    .map-strip.expanded .map-expand-btn svg { transform: rotate(180deg); }
+
+    /* Stop nav pills overlaid on map bottom edge */
+    .stop-nav {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 400;
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      background: linear-gradient(to top, rgba(255,255,255,0.97) 60%, transparent);
+      overflow-x: auto;
+    }
+    .stop-nav::-webkit-scrollbar { display: none; }
+    .stop-pill {
+      flex-shrink: 0; display: flex; align-items: center; gap: 6px;
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: 20px; padding: 5px 12px 5px 8px;
+      font-size: 12px; font-weight: 600; color: var(--text-sub);
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .stop-pill:hover { border-color: var(--og-purple); color: var(--og-purple); }
+    .stop-pill.active {
+      background: var(--og-purple); border-color: var(--og-purple);
+      color: #fff; box-shadow: 0 2px 8px rgba(75,63,255,0.3);
+    }
+    .stop-pill .pill-num {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--og-purple-light); color: var(--og-purple);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800;
+    }
+    .stop-pill.active .pill-num { background: rgba(255,255,255,0.25); color: #fff; }
+
+    /* ── CONTENT AREA ── */
+    .content-area {
+      flex: 1; min-height: 0;
+      overflow-y: auto; background: var(--bg-light);
+    }
+    .content-area::-webkit-scrollbar { width: 5px; }
+    .content-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Welcome screen */
+    .welcome-screen {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      height: 100%; gap: 10px; padding: 40px;
+      text-align: center;
+    }
+    .welcome-screen h2 { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+    .welcome-screen p { font-size: 14px; color: var(--text-sub); max-width: 340px; line-height: 1.7; }
+
+    /* ── CUSTOMER DETAIL ── */
+    .customer-detail { display: none; flex-direction: column; }
+    .customer-detail.visible { display: flex; }
+
+    /* Hero gradient panel */
+    .hero-wrap { position: relative; height: 180px; flex-shrink: 0; overflow: hidden; }
+    .hero-bg {
+      width: 100%; height: 100%; position: absolute; inset: 0;
+      transition: background 0.4s;
+    }
+    /* Subtle dot-grid texture overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 22px 28px 18px;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; border-radius: 4px;
+      padding: 3px 8px; margin-bottom: 8px;
+      background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
+      backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero-name-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .hero-name { font-size: 26px; font-weight: 800; color: #fff; line-height: 1.15; }
+    .hero-state {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.75);
+      text-transform: uppercase; letter-spacing: 0.8px;
+      border-left: 1.5px solid rgba(255,255,255,0.35); padding-left: 10px;
+    }
+    .hero-loc { font-size: 12.5px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+    /* Insight body */
+    .insight-body { padding: 24px 28px 32px; }
+
+    /* Summary section */
+    .summary-block {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 22px; margin-bottom: 20px;
+    }
+    .section-heading {
+      font-size: 10px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1.4px; margin-bottom: 10px;
+    }
+    .sh-summary    { color: var(--og-purple); }
+    .sh-well       { color: var(--og-green); }
+    .sh-gap        { color: var(--og-amber); }
+    .sh-suggestion { color: var(--og-orange); }
+
+    .summary-text {
+      font-size: 14px; line-height: 1.8; color: var(--text-sub);
+      font-style: italic;
+    }
+    .summary-text.filled { font-style: normal; color: var(--text-main); }
+
+    /* Three-column insight grid */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 900px) { .insights-grid { grid-template-columns: 1fr; } }
+
+    .insight-col {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 18px 14px;
+      display: flex; flex-direction: column;
+      border-top-width: 3px;
+    }
+    .insight-col.col-well       { border-top-color: var(--og-green); }
+    .insight-col.col-gap        { border-top-color: var(--og-amber); }
+    .insight-col.col-suggestion { border-top-color: var(--og-orange); }
+    .col-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .col-title { font-size: 13px; font-weight: 700; }
+    .ct-well       { color: var(--og-green); }
+    .ct-gap        { color: var(--og-amber); }
+    .ct-suggestion { color: var(--og-orange); }
+
+    .col-count {
+      margin-left: auto; font-size: 18px; font-weight: 800; line-height: 1;
+    }
+    .cc-well       { color: var(--og-green); }
+    .cc-gap        { color: var(--og-amber); }
+    .cc-suggestion { color: var(--og-orange); }
+
+    .insight-item {
+      display: flex; gap: 9px; align-items: flex-start;
+      padding: 9px 0; border-bottom: 1px solid var(--border-soft);
+      font-size: 13px; line-height: 1.55; color: var(--text-sub);
+      font-style: italic;
+    }
+    .insight-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .insight-item.filled { font-style: normal; color: var(--text-main); }
+    .item-dot { flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+
+    /* Journey nav footer */
+    .journey-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 28px;
+      background: #fff; border-top: 1px solid var(--border);
+      position: sticky; bottom: 0;
+    }
+    .jnav-btn {
+      display: flex; align-items: center; gap: 7px;
+      background: none; border: 1.5px solid var(--border);
+      border-radius: 8px; padding: 8px 16px;
+      font-size: 13px; font-weight: 600; color: var(--text-sub);
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .jnav-btn:hover:not(:disabled) { border-color: var(--og-purple); color: var(--og-purple); }
+    .jnav-btn:disabled { opacity: 0.3; cursor: default; }
+    .jnav-btn.primary {
+      background: var(--og-purple); border-color: var(--og-purple);
+      color: #fff;
+    }
+    .jnav-btn.primary:hover:not(:disabled) { background: var(--og-purple-dark); }
+
+    .progress-row { display: flex; align-items: center; gap: 6px; }
+    .prog-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); cursor: pointer; transition: all 0.18s;
+    }
+    .prog-dot:hover   { background: var(--text-dim); }
+    .prog-dot.visited { background: var(--og-green); }
+    .prog-dot.active  { background: var(--og-purple); transform: scale(1.4); }
+
+    /* Dotted route line */
+    @keyframes dashMarch { to { stroke-dashoffset: -20; } }
+    .route-line { animation: dashMarch 0.8s linear infinite; }
+
+    /* Leaflet tooltip */
+    .leaflet-tooltip {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 12px !important; font-weight: 600 !important;
+      border-radius: 6px !important; border: 1px solid var(--border) !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+      color: var(--text-dark) !important; padding: 5px 10px !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-strip"></div>
+
+<header>
+  <div class="header-brand">
+    <span class="og-wordmark">OpenGov</span>
+    <div class="og-chevron"></div>
+    <div class="hdr-divider"></div>
+    <span class="hdr-subtitle">OpenGov ERP Private Preview Feedback</span>
+  </div>
+  <div class="hdr-right">
+    <span class="hdr-tag">March 2026</span>
+    <span class="hdr-pill" id="hdr-pill">Select a stop</span>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- MAP STRIP -->
+  <div class="map-strip" id="map-strip">
+    <div id="map"></div>
+    <button class="map-expand-btn" id="map-expand-btn" onclick="toggleMap()" title="Expand / collapse map">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="1,5 1,1 5,1"></polyline>
+        <polyline points="9,1 13,1 13,5"></polyline>
+        <polyline points="13,9 13,13 9,13"></polyline>
+        <polyline points="5,13 1,13 1,9"></polyline>
+      </svg>
+      <span id="map-expand-label">Expand Map</span>
+    </button>
+    <div class="stop-nav" id="stop-nav"></div>
+  </div>
+
+  <!-- CONTENT AREA -->
+  <div class="content-area" id="content-area">
+
+    <!-- Welcome -->
+    <div class="welcome-screen" id="welcome-screen">
+      <h2>Select a customer stop</h2>
+      <p>Click any pin on the map above, or use the stop pills to jump directly to a customer's insights.</p>
+    </div>
+
+    <!-- Customer detail -->
+    <div class="customer-detail" id="customer-detail">
+
+      <!-- Hero gradient panel -->
+      <div class="hero-wrap">
+        <div id="hero-inner" style="position:absolute;inset:0;"></div>
+        <div class="hero-overlay" id="hero-overlay"></div>
+      </div>
+
+      <!-- Insight body -->
+      <div class="insight-body">
+
+        <!-- Summary -->
+        <div class="summary-block">
+          <div class="section-heading sh-summary">Visit Summary</div>
+          <p class="summary-text" id="summary-text">—</p>
+        </div>
+
+        <!-- 3-col grid -->
+        <div class="insights-grid">
+          <!-- Went Well -->
+          <div class="insight-col col-well">
+            <div class="col-header">
+              <span class="col-title ct-well">What Went Well</span>
+              <span class="col-count cc-well" id="count-well">—</span>
+            </div>
+            <div id="items-well"></div>
+          </div>
+          <!-- Gaps -->
+          <div class="insight-col col-gap">
+            <div class="col-header">
+              <span class="col-title ct-gap">Gaps Identified</span>
+              <span class="col-count cc-gap" id="count-gaps">—</span>
+            </div>
+            <div id="items-gaps"></div>
+          </div>
+          <!-- Suggestions -->
+          <div class="insight-col col-suggestion">
+            <div class="col-header">
+              <span class="col-title ct-suggestion">Suggestions & Ideas</span>
+              <span class="col-count cc-suggestion" id="count-suggestions">—</span>
+            </div>
+            <div id="items-suggestions"></div>
+          </div>
+        </div>
+
+      </div><!-- /insight-body -->
+
+      <!-- Footer nav -->
+      <div class="journey-footer">
+        <button class="jnav-btn" id="btn-prev" onclick="stepStop(-1)">← Previous</button>
+        <div class="progress-row" id="progress-row"></div>
+        <button class="jnav-btn primary" id="btn-next" onclick="stepStop(1)">Next →</button>
+      </div>
+
+    </div><!-- /customer-detail -->
+
+  </div><!-- /content-area -->
+
+</div><!-- /page -->
+
+<script>
+// ─────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────
+const stops = [
+  {
+    id: 0, type: "origin",
+    name: "Pune", subtitle: "Maharashtra, India",
+    lat: 18.5204, lng: 73.8567, emoji: "🏠",
+    heroGradient: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+    summary: "Starting point of the journey. Flew from Pune International Airport to Cincinnati, KY to begin the US private preview customer tour.",
+    wentWell: [], gaps: [], suggestions: []
+  },
+  {
+    id: 1, type: "customer", stopNum: 1,
+    name: "Boone County", subtitle: "Florence / Burlington", state: "Kentucky",
+    lat: 38.978, lng: -84.719, emoji: "🏛️",
+    heroGradient: "linear-gradient(135deg, #1e1b4b 0%, #4B3FFF 100%)",
+    summary: "[ Describe the Boone County visit — who you met, the context of the meeting, and overall impression. What is their setup, team size, and current usage of the product? ]",
+    wentWell: [
+      "[ Add what went well — e.g., 'Product demo resonated strongly with the finance team' ]",
+      "[ Add another highlight from this visit ]",
+      "[ Add a third highlight if applicable ]"
+    ],
+    gaps: [
+      "[ Add a gap or pain point identified — e.g., 'Reporting workflow lacks bulk export capability' ]",
+      "[ Add another gap ]"
+    ],
+    suggestions: [
+      "[ Add a suggestion or feature request — e.g., 'Customer requested a dashboard view for department heads' ]",
+      "[ Add another suggestion ]"
+    ]
+  },
+  {
+    id: 2, type: "customer", stopNum: 2,
+    name: "Tuscaloosa", subtitle: "Birmingham / Tuscaloosa", state: "Alabama",
+    lat: 33.2098, lng: -87.5692, emoji: "🏙️",
+    heroGradient: "linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)",
+    summary: "[ Describe the Tuscaloosa visit — who you met, key conversation themes, and overall sentiment. What stage of adoption are they at, and what are their top priorities? ]",
+    wentWell: [
+      "[ Add what went well — e.g., 'Stakeholders were enthusiastic about the new budgeting module' ]",
+      "[ Add another highlight ]"
+    ],
+    gaps: [
+      "[ Add a gap — e.g., 'Integration with legacy system was a recurring concern' ]",
+      "[ Add another gap ]"
+    ],
+    suggestions: [
+      "[ Add a suggestion — e.g., 'Requested a training sandbox environment for new staff' ]",
+      "[ Add another suggestion ]"
+    ]
+  },
+  {
+    id: 3, type: "customer", stopNum: 3,
+    name: "Liberty City", subtitle: "Liberty", state: "Missouri",
+    lat: 39.246, lng: -94.419, emoji: "🏛️",
+    heroGradient: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
+    summary: "[ Describe the Liberty City, Missouri visit — context, stakeholders, and overall tone. Are they an existing customer, prospect, or renewal? ]",
+    wentWell: [
+      "[ Add what went well ]",
+      "[ Add another highlight ]"
+    ],
+    gaps: [
+      "[ Add a gap or challenge identified ]",
+      "[ Add another gap ]"
+    ],
+    suggestions: [
+      "[ Add a suggestion or feature request ]",
+      "[ Add another suggestion ]"
+    ]
+  },
+  {
+    id: 4, type: "customer", stopNum: 4,
+    name: "Parker County District Hospital", subtitle: "Weatherford", state: "Texas",
+    lat: 32.758, lng: -97.797, emoji: "🏥",
+    heroGradient: "linear-gradient(135deg, #431407 0%, #c2410c 100%)",
+    summary: "[ Describe the Parker County District Hospital visit — context, key stakeholders (IT, finance, admin?), and overall discussion themes. ]",
+    wentWell: [
+      "[ Add what went well ]",
+      "[ Add another highlight ]"
+    ],
+    gaps: [
+      "[ Add a gap identified ]",
+      "[ Add another gap ]"
+    ],
+    suggestions: [
+      "[ Add a suggestion ]",
+      "[ Add another suggestion ]"
+    ]
+  },
+  {
+    id: 5, type: "customer", stopNum: 5,
+    name: "Town of Northlake", subtitle: "Northlake (DFW)", state: "Texas",
+    lat: 33.075, lng: -97.284, emoji: "🏘️",
+    heroGradient: "linear-gradient(135deg, #312e81 0%, #7c3aed 100%)",
+    summary: "[ Describe the Town of Northlake visit — who you met, scale of the municipality, current product usage, and key themes from the discussion. ]",
+    wentWell: [ "[ Add what went well ]", "[ Add another highlight ]" ],
+    gaps: [ "[ Add a gap identified ]" ],
+    suggestions: [ "[ Add a suggestion from Northlake ]" ]
+  },
+  {
+    id: 6, type: "customer", stopNum: 6,
+    name: "City of Grapevine", subtitle: "Grapevine (DFW)", state: "Texas",
+    lat: 32.934, lng: -97.078, emoji: "🍇",
+    heroGradient: "linear-gradient(135deg, #3b0764 0%, #7e22ce 100%)",
+    summary: "[ Describe the Grapevine visit — context, key stakeholders, product usage maturity, and overall impression. ]",
+    wentWell: [ "[ Add what went well ]", "[ Add another highlight ]" ],
+    gaps: [ "[ Add a gap identified ]" ],
+    suggestions: [ "[ Add a suggestion from Grapevine ]" ]
+  }
+];
+
+// ─────────────────────────────────────────
+//  MAP EXPAND TOGGLE
+// ─────────────────────────────────────────
+let mapExpanded = false;
+
+function toggleMap() {
+  mapExpanded = !mapExpanded;
+  const strip = document.getElementById('map-strip');
+  const label = document.getElementById('map-expand-label');
+  strip.classList.toggle('expanded', mapExpanded);
+  label.textContent = mapExpanded ? 'Collapse Map' : 'Expand Map';
+  setTimeout(() => {
+    map.invalidateSize();
+    if (activeId !== null) {
+      const s = stops[activeId];
+      map.flyTo([s.lat, s.lng], map.getZoom(), { duration: 0.4 });
+    }
+  }, 390);
+}
+
+// ─────────────────────────────────────────
+//  MAP
+// ─────────────────────────────────────────
+const map = L.map('map', {
+  center: [28, 10], zoom: 3,
+  zoomControl: false, attributionControl: false
+});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  subdomains: 'abcd', maxZoom: 18
+}).addTo(map);
+L.control.attribution({ position: 'bottomright', prefix: '© OpenStreetMap · CARTO' }).addTo(map);
+
+// ─────────────────────────────────────────
+//  ROUTE LINE
+// ─────────────────────────────────────────
+let routeLayer = null;
+
+function updateRouteLine(toId) {
+  // Remove old line
+  if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+
+  // Build ordered path: origin (0) → all customer stops up to toId
+  const path = [];
+  for (let i = 0; i <= toId; i++) {
+    if (stops[i]) path.push([stops[i].lat, stops[i].lng]);
+  }
+  if (path.length < 2) return;
+
+  // Draw dotted animated polyline
+  routeLayer = L.polyline(path, {
+    color: '#4B3FFF',
+    weight: 2.5,
+    opacity: 0.7,
+    dashArray: '7 9',
+    className: 'route-line'
+  }).addTo(map);
+}
+
+// Markers
+let activeId = null;
+
+stops.forEach(stop => {
+  const isOrigin = stop.type === "origin";
+  const bg     = isOrigin ? '#ecfdf5' : '#ede9ff';
+  const border = isOrigin ? '#17b26a' : '#4B3FFF';
+  const txt    = isOrigin ? '#17b26a' : '#4B3FFF';
+  const label  = isOrigin ? '🏠' : stop.stopNum;
+  const size   = 32;
+
+  const icon = L.divIcon({
+    className: '',
+    html: `<div id="m-${stop.id}" style="
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:${bg};border:2.5px solid ${border};
+      display:flex;align-items:center;justify-content:center;
+      font-size:${isOrigin?13:12}px;font-weight:800;color:${txt};
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;
+      transition:transform 0.15s,box-shadow 0.15s;
+      font-family:'DM Sans',sans-serif;
+    ">${label}</div>`,
+    iconSize: [size, size], iconAnchor: [size/2, size/2]
+  });
+
+  const marker = L.marker([stop.lat, stop.lng], { icon }).addTo(map);
+  marker.bindTooltip(stop.name, { direction: 'top', offset: [0,-4] });
+  marker.on('click', () => selectStop(stop.id));
+});
+
+const allLL = stops.map(s => [s.lat, s.lng]);
+map.fitBounds(L.latLngBounds(allLL).pad(0.08));
+
+setTimeout(() => { map.invalidateSize(); map.fitBounds(L.latLngBounds(allLL).pad(0.08)); }, 120);
+
+// ─────────────────────────────────────────
+//  STOP NAV PILLS
+// ─────────────────────────────────────────
+function buildStopNav() {
+  const nav = document.getElementById('stop-nav');
+  nav.innerHTML = stops.map(s => {
+    if (s.type === 'origin') return '';
+    return `<button class="stop-pill" id="pill-${s.id}" onclick="selectStop(${s.id})">
+      <span class="pill-num">${s.stopNum}</span>
+      ${s.name}
+    </button>`;
+  }).join('');
+}
+buildStopNav();
+
+// ─────────────────────────────────────────
+//  HELPERS
+// ─────────────────────────────────────────
+const isPh = s => s.trim().startsWith('[');
+
+function countReal(arr) {
+  const n = (arr || []).filter(x => !isPh(x)).length;
+  return n > 0 ? n : '—';
+}
+
+function buildItems(arr, dotColor) {
+  if (!arr || arr.length === 0)
+    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">—</span><span>Nothing recorded yet.</span></div>`;
+  return arr.map(item =>
+    `<div class="insight-item ${isPh(item) ? '' : 'filled'}">
+       <span class="item-dot" style="color:${dotColor}">•</span>
+       <span>${item}</span>
+     </div>`
+  ).join('');
+}
+
+// ─────────────────────────────────────────
+//  SELECT STOP
+// ─────────────────────────────────────────
+function selectStop(id) {
+  activeId = id;
+  const stop = stops[id];
+
+  // Header pill
+  document.getElementById('hdr-pill').textContent =
+    stop.type === 'customer' ? `Stop ${stop.stopNum} of 6` : '—';
+
+  // Activate nav pill
+  document.querySelectorAll('.stop-pill').forEach(p => p.classList.remove('active'));
+  const pill = document.getElementById('pill-' + id);
+  if (pill) { pill.classList.add('active'); pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }
+
+  // Show detail pane
+  document.getElementById('welcome-screen').style.display = 'none';
+  const detail = document.getElementById('customer-detail');
+  detail.classList.add('visible');
+
+  // Hero gradient background
+  const heroInner = document.getElementById('hero-inner');
+  heroInner.innerHTML = `<div class="hero-bg" style="background:${stop.heroGradient}"></div>`;
+
+  // Hero overlay
+  const tagLabel = stop.type === 'customer' ? `Customer Stop ${stop.stopNum} of 6` : 'Origin';
+  const stateHtml = stop.state
+    ? `<span class="hero-state">${stop.state}</span>` : '';
+  document.getElementById('hero-overlay').innerHTML = `
+    <div class="hero-tag">${tagLabel}</div>
+    <div class="hero-name-row">
+      <div class="hero-name">${stop.name}</div>
+      ${stateHtml}
+    </div>
+    <div class="hero-loc">${stop.subtitle}</div>
+  `;
+
+  // Summary
+  const summaryEl = document.getElementById('summary-text');
+  summaryEl.textContent = stop.summary;
+  summaryEl.className = 'summary-text' + (isPh(stop.summary) ? '' : ' filled');
+
+  // Insight columns
+  document.getElementById('count-well').textContent        = countReal(stop.wentWell);
+  document.getElementById('count-gaps').textContent        = countReal(stop.gaps);
+  document.getElementById('count-suggestions').textContent = countReal(stop.suggestions);
+  document.getElementById('items-well').innerHTML        = buildItems(stop.wentWell, '#17b26a');
+  document.getElementById('items-gaps').innerHTML        = buildItems(stop.gaps, '#d97706');
+  document.getElementById('items-suggestions').innerHTML = buildItems(stop.suggestions, '#F86A0B');
+
+  // Progress dots
+  const progRow = document.getElementById('progress-row');
+  progRow.innerHTML = stops.map(s => {
+    const cls = s.id === id ? 'prog-dot active' : s.id < id ? 'prog-dot visited' : 'prog-dot';
+    return `<div class="${cls}" onclick="selectStop(${s.id})" title="${s.name}"></div>`;
+  }).join('');
+
+  // Nav buttons
+  const customerStops = stops.filter(s => s.type === 'customer');
+  const idx = customerStops.findIndex(s => s.id === id);
+  const prev = idx > 0 ? customerStops[idx - 1] : null;
+  const next = idx < customerStops.length - 1 ? customerStops[idx + 1] : null;
+
+  const prevBtn = document.getElementById('btn-prev');
+  const nextBtn = document.getElementById('btn-next');
+  prevBtn.disabled = !prev;
+  nextBtn.disabled = !next;
+  prevBtn.innerHTML = prev ? `← ${prev.name}` : '← Previous';
+  nextBtn.innerHTML = next ? `${next.name} →` : 'Next →';
+
+  // Draw dotted route from origin to current stop
+  updateRouteLine(id);
+
+  // ── DFW cluster (stops 4-5-6): zoom into DFW so route lines are visible ──
+  const DFW_CLUSTER = [4, 5, 6];
+  const inCluster   = DFW_CLUSTER.includes(id);
+
+  if (inCluster) {
+    // Fit all three DFW pins so the connecting lines are clearly visible
+    const dfwBounds = L.latLngBounds(
+      DFW_CLUSTER.map(cid => [stops[cid].lat, stops[cid].lng])
+    ).pad(0.3);
+    map.flyToBounds(dfwBounds, { maxZoom: 11, duration: 0.9 });
+  } else {
+    map.flyTo([stop.lat, stop.lng], 6, { duration: 0.9 });
+  }
+  highlightMarker(id);
+
+  // Scroll content to top
+  document.getElementById('content-area').scrollTop = 0;
+}
+
+function stepStop(dir) {
+  const customerStops = stops.filter(s => s.type === 'customer');
+  const idx = customerStops.findIndex(s => s.id === activeId);
+  const target = customerStops[idx + dir];
+  if (target) selectStop(target.id);
+}
+
+function highlightMarker(id) {
+  stops.forEach(s => {
+    const el = document.getElementById('m-' + s.id);
+    if (!el) return;
+    const isOrigin = s.type === 'origin';
+    const border = isOrigin ? '#17b26a' : '#4B3FFF';
+    if (s.id === id) {
+      el.style.boxShadow = `0 0 0 3px ${border}40, 0 4px 14px ${border}60`;
+      el.style.transform = 'scale(1.3)';
+    } else {
+      el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)';
+      el.style.transform = 'scale(1)';
+    }
+  });
+}
+
+// Auto-open first customer
+setTimeout(() => selectStop(1), 800);
+</script>
+</body>
+</html>
