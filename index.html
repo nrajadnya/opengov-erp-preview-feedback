@@ -883,9 +883,9 @@
     <div class="apikey-title">Connect AI Analysis</div>
     <div class="apikey-sub">Enter your Anthropic API key to enable AI-powered customer insights. The key is used only in this session and never stored.</div>
     <div class="apikey-hint">Get your key at <a href="https://console.anthropic.com/settings/api-keys" target="_blank">console.anthropic.com</a> → API Keys</div>
-    <input class="apikey-input" id="apikey-input" type="password" placeholder="sk-ant-api03-…"
+    <input class="apikey-input" id="apikey-input" type="password" placeholder="Paste your API key…"
       onkeydown="if(event.key==='Enter') confirmApiKey(); if(event.key==='Escape') closeApiKeyModal()" />
-    <div class="apikey-error" id="apikey-error">Key must start with sk-ant- — please check and try again.</div>
+    <div class="apikey-error" id="apikey-error">Please enter a valid API key.</div>
     <div class="apikey-privacy">🔒 Your key stays in memory only — never sent to our servers.</div>
     <div class="pw-actions">
       <button class="pw-btn secondary" onclick="closeApiKeyModal()">Cancel</button>
@@ -1861,7 +1861,7 @@ function confirmApiKey() {
   const input = document.getElementById('apikey-input');
   const err   = document.getElementById('apikey-error');
   const key   = input.value.trim();
-  if (!key.startsWith('sk-ant-')) {
+  if (!key) {
     input.className = 'apikey-input error';
     err.className = 'apikey-error show';
     input.focus();
@@ -2025,17 +2025,11 @@ const AI_TOOLS = [
 ];
 
 async function callClaude(messages) {
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const response = await fetch('/api/chat', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': aiApiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-5',
-      max_tokens: 1024,
+      token: aiApiKey,
       system: buildSystemPrompt(),
       tools: AI_TOOLS,
       messages
