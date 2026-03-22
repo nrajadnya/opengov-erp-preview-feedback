@@ -307,6 +307,139 @@
     .customer-detail.visible ~ .side-nav-btn,
     .side-nav-btn.show { display: flex; }
 
+    /* ── MANAGE FEEDBACK BUTTON ── */
+    .manage-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--og-purple); color: #fff;
+      border: none; border-radius: 8px;
+      padding: 7px 14px; font-size: 12px; font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer; transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .manage-btn:hover { background: var(--og-purple-dark); }
+    .manage-btn.active {
+      background: var(--og-orange);
+    }
+    .manage-btn.active:hover { background: #d9590a; }
+
+    /* ── PASSWORD MODAL ── */
+    .pw-overlay {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,0.45);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+    .pw-overlay.hidden { display: none; }
+    .pw-modal {
+      background: #fff; border-radius: 14px;
+      padding: 28px 32px; width: 340px; max-width: 90vw;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .pw-title { font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; }
+    .pw-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 18px; line-height: 1.5; }
+    .pw-input {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      outline: none; margin-bottom: 8px; box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+    .pw-input:focus { border-color: var(--og-purple); }
+    .pw-input.error { border-color: #ef4444; }
+    .pw-error { font-size: 12px; color: #ef4444; margin-bottom: 12px; display: none; }
+    .pw-error.show { display: block; }
+    .pw-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+    .pw-btn {
+      padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;
+      font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s;
+      border: 1.5px solid var(--border);
+    }
+    .pw-btn.primary { background: var(--og-purple); color: #fff; border-color: var(--og-purple); }
+    .pw-btn.primary:hover { background: var(--og-purple-dark); }
+    .pw-btn.secondary { background: none; color: var(--text-sub); }
+    .pw-btn.secondary:hover { border-color: var(--text-dim); color: var(--text-main); }
+
+    /* ── EDIT MODE BANNER ── */
+    .edit-banner {
+      display: none; flex-shrink: 0;
+      align-items: center; justify-content: space-between;
+      padding: 9px 28px; gap: 12px;
+      background: #ede9ff; border-bottom: 1.5px solid #c7c0ff;
+      font-size: 13px; font-weight: 600; color: var(--og-purple);
+    }
+    .edit-banner.visible { display: flex; }
+    .edit-banner-label { display: flex; align-items: center; gap: 7px; }
+    .edit-save-btn {
+      background: var(--og-purple); color: #fff;
+      border: none; border-radius: 7px; padding: 6px 16px;
+      font-size: 12px; font-weight: 700; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .edit-save-btn:hover { background: var(--og-purple-dark); }
+
+    /* ── EDIT MODE FIELDS ── */
+    .edit-summary-textarea {
+      width: 100%; min-height: 72px;
+      border: 1.5px solid var(--og-purple-light); border-radius: 8px;
+      padding: 10px 12px; font-size: 14px; line-height: 1.75;
+      font-family: 'DM Sans', sans-serif; color: var(--text-main);
+      resize: vertical; outline: none; box-sizing: border-box;
+      transition: border-color 0.15s; background: #faf9ff;
+    }
+    .edit-summary-textarea:focus { border-color: var(--og-purple); background: #fff; }
+
+    .edit-item-row {
+      display: flex; align-items: flex-start; gap: 6px;
+      padding: 5px 0; border-bottom: 1px solid var(--border-soft);
+    }
+    .edit-item-row:last-of-type { border-bottom: none; }
+    .edit-item-input {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 7px;
+      padding: 7px 10px; font-size: 13px; line-height: 1.5;
+      font-family: 'DM Sans', sans-serif; color: var(--text-main);
+      outline: none; resize: none; min-height: 34px;
+      transition: border-color 0.15s; background: #fff;
+    }
+    .edit-item-input:focus { border-color: var(--og-purple); }
+    .edit-item-select {
+      flex-shrink: 0; width: 108px;
+      border: 1.5px solid var(--border); border-radius: 7px;
+      padding: 6px 6px; font-size: 11px; font-weight: 700;
+      font-family: 'DM Sans', sans-serif; color: var(--text-sub);
+      background: #fff; outline: none; cursor: pointer;
+      transition: all 0.15s; margin-top: 2px;
+    }
+    .edit-item-select:focus { border-color: var(--og-purple); }
+    .edit-item-select.prioritised { border-color: var(--og-orange); color: var(--og-orange); background: var(--og-orange-light); }
+    .edit-delete-btn {
+      flex-shrink: 0; width: 28px; height: 28px; margin-top: 3px;
+      background: none; border: 1.5px solid var(--border); border-radius: 6px;
+      color: var(--text-dim); font-size: 16px; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .edit-delete-btn:hover { border-color: #ef4444; color: #ef4444; background: #fff5f5; }
+    .add-item-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: none; border: 1.5px dashed var(--border);
+      border-radius: 8px; padding: 8px 12px;
+      font-size: 12px; font-weight: 600; color: var(--text-dim);
+      cursor: pointer; width: 100%; margin-top: 8px; box-sizing: border-box;
+      transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+    }
+    .add-item-btn:hover { border-color: var(--og-purple); color: var(--og-purple); background: #faf9ff; }
+
+    /* ── STATUS BADGE (view mode) ── */
+    .status-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 7px; border-radius: 20px;
+      margin-left: 6px; vertical-align: middle;
+      text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+    }
+    .status-badge.noted { background: var(--bg-section); color: var(--text-dim); }
+    .status-badge.prioritised { background: var(--og-orange-light); color: var(--og-orange); }
+
     /* Journey nav footer — lives OUTSIDE the scroll container */
     .journey-footer {
       display: none; /* hidden by default, shown when a stop is selected */
@@ -377,8 +510,32 @@
   <div class="hdr-right">
     <span class="hdr-tag">March 2026</span>
     <span class="hdr-pill" id="hdr-pill">Select a stop</span>
+    <button class="manage-btn" id="manage-btn" onclick="openManageFeedback()" title="Edit feedback for this stop">
+      ✎ Manage Feedback
+    </button>
   </div>
 </header>
+
+<!-- Edit mode banner (shown below header when editing) -->
+<div class="edit-banner" id="edit-banner">
+  <span class="edit-banner-label">✎ &nbsp;Edit mode — changes auto-save when you switch stops</span>
+  <button class="edit-save-btn" onclick="lockEditing()">✓ Done Editing</button>
+</div>
+
+<!-- Password modal -->
+<div class="pw-overlay hidden" id="pw-overlay">
+  <div class="pw-modal">
+    <div class="pw-title">🔒 Manage Feedback</div>
+    <div class="pw-sub">Enter the editor password to unlock feedback editing for all stops.</div>
+    <input class="pw-input" id="pw-input" type="password" placeholder="Password"
+      onkeydown="if(event.key==='Enter') checkPassword()" />
+    <div class="pw-error" id="pw-error">Incorrect password. Please try again.</div>
+    <div class="pw-actions">
+      <button class="pw-btn secondary" onclick="closePwModal()">Cancel</button>
+      <button class="pw-btn primary" onclick="checkPassword()">Unlock</button>
+    </div>
+  </div>
+</div>
 
 <div class="page">
 
@@ -694,29 +851,268 @@ buildStopNav();
 // ─────────────────────────────────────────
 //  HELPERS
 // ─────────────────────────────────────────
-const isPh = s => s.trim().startsWith('[');
+const isPh = s => (typeof s === 'string' ? s : s.text).trim().startsWith('[');
+const itemText = s => typeof s === 'string' ? s : s.text;
+const itemStatus = s => (typeof s === 'object' && s.status) ? s.status : 'Noted';
+
+// Normalize gaps/suggestions to {text, status} objects once at startup
+stops.forEach(stop => {
+  ['gaps','suggestions'].forEach(key => {
+    stop[key] = (stop[key] || []).map(x =>
+      typeof x === 'string' ? { text: x, status: 'Noted' } : x
+    );
+  });
+});
+
+// ── EDIT MODE STATE ──
+let editMode = false;
+let currentStopId = null;
 
 function countReal(arr) {
   const n = (arr || []).filter(x => !isPh(x)).length;
   return n > 0 ? n : '—';
 }
 
-function buildItems(arr, dotColor) {
+// ── VIEW MODE: render items ──
+function buildItems(arr, dotColor, hasStatus) {
   if (!arr || arr.length === 0)
     return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">—</span><span>Nothing recorded yet.</span></div>`;
-  return arr.map(item =>
-    `<div class="insight-item ${isPh(item) ? '' : 'filled'}">
+  return arr.map(item => {
+    const text = itemText(item);
+    const status = hasStatus ? itemStatus(item) : null;
+    const badge = (status && !isPh(item))
+      ? `<span class="status-badge ${status.toLowerCase()}">${status}</span>` : '';
+    return `<div class="insight-item ${isPh(item) ? '' : 'filled'}">
        <span class="item-dot" style="color:${dotColor}">•</span>
-       <span>${item}</span>
-     </div>`
-  ).join('');
+       <span>${text}${badge}</span>
+     </div>`;
+  }).join('');
+}
+
+// ── EDIT MODE: render items ──
+function buildItemsEdit(arr, containerId, hasStatus) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  (arr || []).forEach((item, idx) => {
+    const text = itemText(item);
+    const status = hasStatus ? itemStatus(item) : 'Noted';
+    const row = document.createElement('div');
+    row.className = 'edit-item-row';
+    row.dataset.idx = idx;
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'edit-item-input';
+    textarea.value = text;
+    textarea.rows = 2;
+    textarea.dataset.field = containerId;
+    textarea.dataset.idx = idx;
+    row.appendChild(textarea);
+
+    if (hasStatus) {
+      const sel = document.createElement('select');
+      sel.className = 'edit-item-select' + (status === 'Prioritised' ? ' prioritised' : '');
+      sel.dataset.field = containerId;
+      sel.dataset.idx = idx;
+      ['Noted','Prioritised'].forEach(opt => {
+        const o = document.createElement('option');
+        o.value = opt; o.textContent = opt;
+        if (opt === status) o.selected = true;
+        sel.appendChild(o);
+      });
+      sel.addEventListener('change', function() {
+        this.className = 'edit-item-select' + (this.value === 'Prioritised' ? ' prioritised' : '');
+      });
+      row.appendChild(sel);
+    }
+
+    const del = document.createElement('button');
+    del.className = 'edit-delete-btn';
+    del.innerHTML = '×';
+    del.title = 'Remove this item';
+    del.addEventListener('click', () => { row.remove(); });
+    row.appendChild(del);
+
+    container.appendChild(row);
+  });
+
+  // Add item button
+  const addBtn = document.createElement('button');
+  addBtn.className = 'add-item-btn';
+  addBtn.innerHTML = '+ Add item';
+  addBtn.addEventListener('click', () => {
+    const newRow = document.createElement('div');
+    newRow.className = 'edit-item-row';
+    const newInput = document.createElement('textarea');
+    newInput.className = 'edit-item-input';
+    newInput.rows = 2;
+    newInput.dataset.field = containerId;
+    newInput.placeholder = 'Enter text…';
+    newRow.appendChild(newInput);
+    if (hasStatus) {
+      const sel = document.createElement('select');
+      sel.className = 'edit-item-select';
+      ['Noted','Prioritised'].forEach(opt => {
+        const o = document.createElement('option'); o.value = opt; o.textContent = opt;
+        sel.appendChild(o);
+      });
+      sel.addEventListener('change', function() {
+        this.className = 'edit-item-select' + (this.value === 'Prioritised' ? ' prioritised' : '');
+      });
+      newRow.appendChild(sel);
+    }
+    const del2 = document.createElement('button');
+    del2.className = 'edit-delete-btn'; del2.innerHTML = '×';
+    del2.addEventListener('click', () => newRow.remove());
+    newRow.appendChild(del2);
+    container.insertBefore(newRow, addBtn);
+    newInput.focus();
+  });
+  container.appendChild(addBtn);
+}
+
+// ── COLLECT EDITS FROM DOM → save to stops array ──
+function saveCurrentEdits() {
+  if (!editMode || currentStopId === null) return;
+  const stop = stops[currentStopId];
+
+  // Summary
+  const ta = document.getElementById('summary-edit-ta');
+  if (ta) stop.summary = ta.value;
+
+  // Helper: collect rows from a container
+  function collectRows(containerId, hasStatus) {
+    const container = document.getElementById(containerId);
+    if (!container) return [];
+    const rows = container.querySelectorAll('.edit-item-row');
+    const result = [];
+    rows.forEach(row => {
+      const input = row.querySelector('.edit-item-input');
+      const sel   = row.querySelector('.edit-item-select');
+      const text  = input ? input.value.trim() : '';
+      if (!text) return; // skip empty rows
+      if (hasStatus) {
+        result.push({ text, status: sel ? sel.value : 'Noted' });
+      } else {
+        result.push(text);
+      }
+    });
+    return result;
+  }
+
+  stop.wentWell    = collectRows('items-well', false);
+  stop.gaps        = collectRows('items-gaps', true);
+  stop.suggestions = collectRows('items-suggestions', true);
+}
+
+// ── RENDER CURRENT STOP IN EDIT MODE ──
+function renderEditMode(stop) {
+  // Summary → textarea
+  const summaryBlock = document.querySelector('.summary-block');
+  const existingP = document.getElementById('summary-text');
+  if (existingP) existingP.style.display = 'none';
+  let ta = document.getElementById('summary-edit-ta');
+  if (!ta) {
+    ta = document.createElement('textarea');
+    ta.id = 'summary-edit-ta';
+    ta.className = 'edit-summary-textarea';
+    summaryBlock.appendChild(ta);
+  }
+  ta.value = stop.summary;
+  ta.style.display = 'block';
+
+  // Columns
+  buildItemsEdit(stop.wentWell,    'items-well',        false);
+  buildItemsEdit(stop.gaps,        'items-gaps',        true);
+  buildItemsEdit(stop.suggestions, 'items-suggestions', true);
+
+  // Update counts live — not critical in edit mode, just clear them
+  document.getElementById('count-well').textContent        = '✎';
+  document.getElementById('count-gaps').textContent        = '✎';
+  document.getElementById('count-suggestions').textContent = '✎';
+}
+
+// ── RENDER CURRENT STOP IN VIEW MODE ──
+function renderViewMode(stop) {
+  // Restore summary text
+  const existingP = document.getElementById('summary-text');
+  const ta = document.getElementById('summary-edit-ta');
+  if (ta) ta.style.display = 'none';
+  if (existingP) {
+    existingP.style.display = '';
+    existingP.textContent = stop.summary;
+    existingP.className = 'summary-text' + (isPh(stop.summary) ? '' : ' filled');
+  }
+
+  document.getElementById('count-well').textContent        = countReal(stop.wentWell);
+  document.getElementById('count-gaps').textContent        = countReal(stop.gaps);
+  document.getElementById('count-suggestions').textContent = countReal(stop.suggestions);
+  document.getElementById('items-well').innerHTML        = buildItems(stop.wentWell,    '#17b26a', false);
+  document.getElementById('items-gaps').innerHTML        = buildItems(stop.gaps,        '#d97706', true);
+  document.getElementById('items-suggestions').innerHTML = buildItems(stop.suggestions, '#F86A0B', true);
+}
+
+// ── PASSWORD / LOCK LOGIC ──
+function openManageFeedback() {
+  if (editMode) { lockEditing(); return; }
+  if (currentStopId === null) {
+    alert('Please select a customer stop first.'); return;
+  }
+  // Show password modal
+  const overlay = document.getElementById('pw-overlay');
+  const input   = document.getElementById('pw-input');
+  const err     = document.getElementById('pw-error');
+  overlay.classList.remove('hidden');
+  input.value = ''; input.className = 'pw-input';
+  err.className = 'pw-error';
+  setTimeout(() => input.focus(), 50);
+}
+
+function closePwModal() {
+  document.getElementById('pw-overlay').classList.add('hidden');
+}
+
+function checkPassword() {
+  const input = document.getElementById('pw-input');
+  const err   = document.getElementById('pw-error');
+  if (input.value === '01Aspirine!') {
+    closePwModal();
+    enableEditing();
+  } else {
+    input.className = 'pw-input error';
+    err.className = 'pw-error show';
+    input.focus();
+  }
+}
+
+function enableEditing() {
+  editMode = true;
+  document.getElementById('manage-btn').textContent  = '✓ Done Editing';
+  document.getElementById('manage-btn').classList.add('active');
+  document.getElementById('edit-banner').classList.add('visible');
+  if (currentStopId !== null) renderEditMode(stops[currentStopId]);
+}
+
+function lockEditing() {
+  saveCurrentEdits();
+  editMode = false;
+  document.getElementById('manage-btn').textContent = '✎ Manage Feedback';
+  document.getElementById('manage-btn').classList.remove('active');
+  document.getElementById('edit-banner').classList.remove('visible');
+  if (currentStopId !== null) renderViewMode(stops[currentStopId]);
 }
 
 // ─────────────────────────────────────────
 //  SELECT STOP
 // ─────────────────────────────────────────
 function selectStop(id) {
+  // Auto-save any edits from the previous stop before switching
+  if (editMode && currentStopId !== null && currentStopId !== id) {
+    saveCurrentEdits();
+  }
+
   activeId = id;
+  currentStopId = id;
   const stop = stops[id];
 
   // Header pill
@@ -752,18 +1148,12 @@ function selectStop(id) {
     <div class="hero-loc">${stop.subtitle}</div>
   `;
 
-  // Summary
-  const summaryEl = document.getElementById('summary-text');
-  summaryEl.textContent = stop.summary;
-  summaryEl.className = 'summary-text' + (isPh(stop.summary) ? '' : ' filled');
-
-  // Insight columns
-  document.getElementById('count-well').textContent        = countReal(stop.wentWell);
-  document.getElementById('count-gaps').textContent        = countReal(stop.gaps);
-  document.getElementById('count-suggestions').textContent = countReal(stop.suggestions);
-  document.getElementById('items-well').innerHTML        = buildItems(stop.wentWell, '#17b26a');
-  document.getElementById('items-gaps').innerHTML        = buildItems(stop.gaps, '#d97706');
-  document.getElementById('items-suggestions').innerHTML = buildItems(stop.suggestions, '#F86A0B');
+  // Render content in current mode
+  if (editMode) {
+    renderEditMode(stop);
+  } else {
+    renderViewMode(stop);
+  }
 
   // Progress dots
   const progRow = document.getElementById('progress-row');
