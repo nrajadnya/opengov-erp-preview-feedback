@@ -8,10 +8,11 @@ module.exports = async function handler(req, res) {
   if (!token || !messages) {
     return res.status(400).json({ error: { message: 'Missing token or messages' } });
   }
-  let bearerToken = token;
+  // Decode ABSK token → BedrockAPIKey-...:secret
+  let apiKey = token;
   if (token.startsWith('ABSK')) {
     try {
-      bearerToken = Buffer.from(token.slice(4), 'base64').toString('utf-8');
+      apiKey = Buffer.from(token.slice(4), 'base64').toString('utf-8');
     } catch (e) {
       return res.status(400).json({ error: { message: 'Invalid ABSK token' } });
     }
@@ -38,13 +39,20 @@ module.exports = async function handler(req, res) {
   const url = 'https://bedrock-runtime.' + region + '.amazonaws.com/model/' + encodeURIComponent(model) + '/converse';
   let bedrockRes;
   try {
-    bedrockRes = await fetch(url, { method: 'POST', headers: { 'Authorization': 'ApiKey ' + bearerToken, 'Content-Type': 'application/json' }, body: JSON.stringify(bedrockBody) });
+    bedrockRes = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'x-amz-bedrock-api-key': apiKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bedrockBody)
+    });
   } catch (err) {
     return res.status(502).json({ error: { message: 'Network error reaching Bedrock: ' + err.message } });
   }
   if (!bedrockRes.ok) {
     const errText = await bedrockRes.text().catch(() => '');
-    return res.status(bedrockRes.status).json({ error: { message: 'Bedrock ' + bedrockRes.status + ': ' + errText.slice(0, 300) } });
+    return res.status(bedrockRes.status).json({ error: { message: 'Bedrock ' + bedrockRes.status + ': ' + errText.slice(0, 400) } });
   }
   const data = await bedrockRes.json();
   const content = (data.output?.message?.content || []).map(block => {
