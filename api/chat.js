@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
   const url = 'https://bedrock-runtime.' + region + '.amazonaws.com/model/' + encodeURIComponent(model) + '/converse';
   let bedrockRes;
   try {
-    bedrockRes = await fetch(url, { method: 'POST', headers: { 'Authorization': 'Bearer ' + bearerToken, 'Content-Type': 'application/json' }, body: JSON.stringify(bedrockBody) });
+    bedrockRes = await fetch(url, { method: 'POST', headers: { 'Authorization': 'ApiKey ' + bearerToken, 'Content-Type': 'application/json' }, body: JSON.stringify(bedrockBody) });
   } catch (err) {
     return res.status(502).json({ error: { message: 'Network error reaching Bedrock: ' + err.message } });
   }
