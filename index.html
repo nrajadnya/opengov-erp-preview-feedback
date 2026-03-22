@@ -611,6 +611,225 @@
       transition: all 0.15s;
     }
     .task-add-cancel:hover { border-color: var(--text-sub); color: var(--text-main); }
+
+    /* ── AI ANALYSIS BUTTON ── */
+    .ai-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #4B3FFF 0%, #7c3aed 100%);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 14px; font-size: 12px; font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(75,63,255,0.25);
+    }
+    .ai-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(75,63,255,0.4); }
+    .ai-btn:active { transform: translateY(0); }
+
+    /* ── AI DRAWER ── */
+    .ai-drawer-overlay {
+      position: fixed; inset: 0; z-index: 4000;
+      background: rgba(0,0,0,0.38);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s; backdrop-filter: blur(2px);
+    }
+    .ai-drawer-overlay.open { opacity: 1; pointer-events: all; }
+    .ai-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 480px; max-width: 95vw;
+      background: #fff; z-index: 4001;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column;
+      box-shadow: -8px 0 48px rgba(0,0,0,0.15);
+    }
+    .ai-drawer.open { transform: translateX(0); }
+    .ai-drawer-header {
+      flex-shrink: 0; padding: 20px 24px 16px; position: relative;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(75,63,255,0.04) 0%, rgba(124,58,237,0.03) 100%);
+    }
+    .ai-drawer-title {
+      font-size: 16px; font-weight: 800; color: var(--text-dark);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ai-drawer-subtitle { font-size: 12px; color: var(--text-sub); margin-top: 4px; font-weight: 500; }
+    .ai-close-btn {
+      position: absolute; top: 18px; right: 20px;
+      width: 28px; height: 28px; background: none;
+      border: 1.5px solid var(--border); border-radius: 6px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 17px; color: var(--text-sub);
+      transition: all 0.15s; font-family: sans-serif; line-height: 1;
+    }
+    .ai-close-btn:hover { border-color: var(--text-sub); color: var(--text-dark); background: var(--bg-light); }
+
+    .ai-drawer-body { flex: 1; overflow-y: auto; padding: 20px 24px 32px; }
+
+    /* Loading state */
+    .ai-loading {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; height: 220px; gap: 14px;
+      color: var(--text-sub); font-size: 13.5px;
+    }
+    .ai-spinner {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 3px solid var(--og-purple-light);
+      border-top-color: var(--og-purple);
+      animation: ai-spin 0.75s linear infinite;
+    }
+    @keyframes ai-spin { to { transform: rotate(360deg); } }
+
+    /* ── CHAT INTERFACE ── */
+    .chat-container {
+      display: flex; flex-direction: column; height: 100%;
+      min-height: 0;
+    }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 16px 16px 8px;
+      display: flex; flex-direction: column; gap: 10px;
+      min-height: 0;
+    }
+    .chat-row { display: flex; align-items: flex-end; gap: 8px; }
+    .chat-row.user { flex-direction: row-reverse; }
+    .chat-row.ai { flex-direction: row; }
+    .chat-avatar {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
+    }
+    .chat-avatar.ai-av {
+      background: linear-gradient(135deg, #4B3FFF, #7c3aed); color: #fff;
+    }
+    .chat-bubble {
+      max-width: 82%; padding: 10px 14px; font-size: 13.5px;
+      line-height: 1.65; word-break: break-word;
+    }
+    .chat-bubble.user {
+      background: var(--og-purple); color: #fff;
+      border-radius: 14px 14px 3px 14px;
+    }
+    .chat-bubble.ai {
+      background: #fff; color: var(--text-main);
+      border: 1px solid var(--border); border-radius: 14px 14px 14px 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .chat-bubble.ai ul { padding-left: 18px; margin: 6px 0 2px; }
+    .chat-bubble.ai li { margin-bottom: 4px; }
+    .chat-bubble.ai strong { font-weight: 700; color: var(--text-dark); }
+    .chat-bubble.ai p { margin: 0 0 6px; }
+    .chat-bubble.ai p:last-child { margin-bottom: 0; }
+    .chat-bubble.ai code {
+      background: var(--bg-section); padding: 1px 5px;
+      border-radius: 4px; font-size: 12px; font-family: monospace;
+    }
+
+    /* Action confirmation bubble (tool results) */
+    .chat-action-row { display: flex; justify-content: center; }
+    .chat-action-bubble {
+      font-size: 11.5px; font-weight: 600; padding: 5px 14px;
+      border-radius: 20px; display: flex; align-items: center; gap: 6px;
+    }
+    .chat-action-bubble.success {
+      background: var(--og-green-light); color: var(--og-green);
+      border: 1px solid #a7f3d0;
+    }
+    .chat-action-bubble.error {
+      background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3;
+    }
+
+    /* Typing indicator */
+    .chat-typing {
+      display: flex; align-items: center; gap: 4px;
+      padding: 10px 14px;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px 14px 14px 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      width: fit-content;
+    }
+    .typing-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text-dim); animation: tdot 1.2s ease infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes tdot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.35; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+    /* Input area */
+    .chat-input-area {
+      flex-shrink: 0; padding: 10px 14px 14px;
+      border-top: 1px solid var(--border); background: #fff;
+      display: flex; gap: 8px; align-items: flex-end;
+    }
+    .chat-input {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 9px 13px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+      outline: none; color: var(--text-main); background: var(--bg-light);
+      transition: border-color 0.15s; resize: none; line-height: 1.5;
+      min-height: 38px; max-height: 100px; overflow-y: auto;
+    }
+    .chat-input:focus { border-color: var(--og-purple); background: #fff; }
+    .chat-send-btn {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px;
+      background: var(--og-purple); color: #fff; border: none;
+      cursor: pointer; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .chat-send-btn:hover { background: var(--og-purple-dark); }
+    .chat-send-btn:disabled { background: var(--border); cursor: not-allowed; }
+
+    /* Chat welcome card */
+    .chat-welcome {
+      margin: 8px 0; padding: 14px 16px;
+      background: var(--og-purple-light); border-radius: 12px;
+      font-size: 13px; color: var(--og-purple); line-height: 1.6;
+    }
+    .chat-welcome strong { font-weight: 800; display: block; margin-bottom: 6px; font-size: 13.5px; }
+    .chat-caps {
+      display: flex; flex-direction: column; gap: 4px; margin-top: 8px;
+    }
+    .chat-cap {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12.5px; color: var(--text-sub);
+    }
+    .chat-cap-icon { font-size: 14px; }
+
+    /* API Key Modal */
+    .apikey-overlay {
+      position: fixed; inset: 0; z-index: 5000;
+      background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+    .apikey-overlay.hidden { display: none; }
+    .apikey-modal {
+      background: #fff; border-radius: 16px;
+      padding: 30px 32px; width: 420px; max-width: 92vw;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+    }
+    .apikey-icon { font-size: 30px; margin-bottom: 12px; }
+    .apikey-title { font-size: 17px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; }
+    .apikey-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 16px; line-height: 1.55; }
+    .apikey-hint {
+      font-size: 11.5px; color: var(--text-dim); margin-bottom: 12px;
+      padding: 8px 12px; background: var(--bg-section); border-radius: 7px;
+    }
+    .apikey-hint a { color: var(--og-purple); text-decoration: none; font-weight: 600; }
+    .apikey-input {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 13px; font-family: 'DM Sans', sans-serif;
+      outline: none; margin-bottom: 6px; box-sizing: border-box;
+      transition: border-color 0.15s; color: var(--text-main);
+    }
+    .apikey-input:focus { border-color: var(--og-purple); }
+    .apikey-input.error { border-color: #ef4444; }
+    .apikey-error { font-size: 12px; color: #ef4444; margin-bottom: 10px; display: none; }
+    .apikey-error.show { display: block; }
+    .apikey-privacy {
+      font-size: 11px; color: var(--text-dim); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 5px;
+    }
   </style>
 </head>
 <body>
@@ -627,6 +846,9 @@
   <div class="hdr-right">
     <span class="hdr-tag">March 2026</span>
     <span class="hdr-pill" id="hdr-pill">Select a stop</span>
+    <button class="ai-btn" id="ai-btn" onclick="openAIAnalysis()" title="AI-powered customer analysis">
+      ✨ AI Analysis
+    </button>
     <button class="manage-btn" id="manage-btn" onclick="openManageFeedback()" title="Edit feedback for this stop">
       ✎ Manage Feedback
     </button>
@@ -652,6 +874,35 @@
       <button class="pw-btn primary" onclick="checkPassword()">Unlock</button>
     </div>
   </div>
+</div>
+
+<!-- API Key Modal -->
+<div class="apikey-overlay hidden" id="apikey-overlay">
+  <div class="apikey-modal">
+    <div class="apikey-icon">🔑</div>
+    <div class="apikey-title">Connect AI Analysis</div>
+    <div class="apikey-sub">Enter your Anthropic API key to enable AI-powered customer insights. The key is used only in this session and never stored.</div>
+    <div class="apikey-hint">Get your key at <a href="https://console.anthropic.com/settings/api-keys" target="_blank">console.anthropic.com</a> → API Keys</div>
+    <input class="apikey-input" id="apikey-input" type="password" placeholder="sk-ant-api03-…"
+      onkeydown="if(event.key==='Enter') confirmApiKey(); if(event.key==='Escape') closeApiKeyModal()" />
+    <div class="apikey-error" id="apikey-error">Key must start with sk-ant- — please check and try again.</div>
+    <div class="apikey-privacy">🔒 Your key stays in memory only — never sent to our servers.</div>
+    <div class="pw-actions">
+      <button class="pw-btn secondary" onclick="closeApiKeyModal()">Cancel</button>
+      <button class="pw-btn primary" onclick="confirmApiKey()">Connect</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Analysis Drawer -->
+<div class="ai-drawer-overlay" id="ai-drawer-overlay" onclick="closeAIDrawer()"></div>
+<div class="ai-drawer" id="ai-drawer">
+  <div class="ai-drawer-header">
+    <button class="ai-close-btn" onclick="closeAIDrawer()">×</button>
+    <div class="ai-drawer-title">✨ AI Customer Analysis</div>
+    <div class="ai-drawer-subtitle" id="ai-drawer-subtitle">Powered by Claude</div>
+  </div>
+  <div class="ai-drawer-body" id="ai-drawer-body" style="padding:0;display:flex;flex-direction:column;min-height:0;"></div>
 </div>
 
 <div class="page">
@@ -1002,6 +1253,10 @@ stops.forEach(stop => {
 let editMode = false;
 let currentStopId = null;
 
+// ── AI ANALYSIS STATE ──
+let aiApiKey = null;
+let aiPendingAfterAuth = false;
+
 function countReal(arr) {
   const n = (arr || []).filter(x => !isPh(x)).length;
   return n > 0 ? n : '—';
@@ -1215,6 +1470,11 @@ function checkPassword() {
   if (input.value === '01Aspirine!') {
     closePwModal();
     enableEditing();
+    // If AI analysis was waiting behind the password gate, open it now
+    if (aiPendingAfterAuth) {
+      aiPendingAfterAuth = false;
+      setTimeout(() => openAIAnalysis(), 120);
+    }
   } else {
     input.className = 'pw-input error';
     err.className = 'pw-error show';
@@ -1555,6 +1815,400 @@ function highlightMarker(id) {
 
 // Auto-open first customer
 setTimeout(() => selectStop(1), 800);
+
+// ─────────────────────────────────────────
+//  AI CHAT
+// ─────────────────────────────────────────
+let chatHistory = [];      // Anthropic messages array
+let chatBusy    = false;   // prevent double-sends
+
+function openAIAnalysis() {
+  if (currentStopId === null) {
+    alert('Please select a customer stop first.');
+    return;
+  }
+  // Step 1: Auth gate — same password as Manage Feedback
+  if (!editMode) {
+    aiPendingAfterAuth = true;
+    openManageFeedback();
+    return;
+  }
+  // Step 2: API key gate
+  if (!aiApiKey) {
+    openApiKeyModal();
+    return;
+  }
+  // Step 3: Open chat
+  openChat();
+}
+
+function openApiKeyModal() {
+  const overlay = document.getElementById('apikey-overlay');
+  const input   = document.getElementById('apikey-input');
+  const err     = document.getElementById('apikey-error');
+  overlay.classList.remove('hidden');
+  input.value = '';
+  input.className = 'apikey-input';
+  err.className = 'apikey-error';
+  setTimeout(() => input.focus(), 60);
+}
+
+function closeApiKeyModal() {
+  document.getElementById('apikey-overlay').classList.add('hidden');
+}
+
+function confirmApiKey() {
+  const input = document.getElementById('apikey-input');
+  const err   = document.getElementById('apikey-error');
+  const key   = input.value.trim();
+  if (!key.startsWith('sk-ant-')) {
+    input.className = 'apikey-input error';
+    err.className = 'apikey-error show';
+    input.focus();
+    return;
+  }
+  aiApiKey = key;
+  closeApiKeyModal();
+  openChat();
+}
+
+function openAIDrawer(stopName) {
+  document.getElementById('ai-drawer-subtitle').textContent = stopName + ' · Ask me anything';
+  document.getElementById('ai-drawer-overlay').classList.add('open');
+  document.getElementById('ai-drawer').classList.add('open');
+}
+
+function closeAIDrawer() {
+  document.getElementById('ai-drawer-overlay').classList.remove('open');
+  document.getElementById('ai-drawer').classList.remove('open');
+}
+
+// ─── Chat init ───────────────────────────
+function openChat() {
+  const stop = stops[currentStopId];
+  openAIDrawer(stop.name);
+  chatHistory = [];
+  chatBusy    = false;
+
+  const body = document.getElementById('ai-drawer-body');
+  body.innerHTML = `
+    <div class="chat-container">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-welcome">
+          <strong>✨ Hi! I'm your AI assistant for ${stop.name}</strong>
+          I can help you with this customer visit. Try asking me to:
+          <div class="chat-caps">
+            <div class="chat-cap"><span class="chat-cap-icon">📝</span> "Add a gap: no mobile access for field staff"</div>
+            <div class="chat-cap"><span class="chat-cap-icon">✅</span> "Add a task to schedule a technical demo"</div>
+            <div class="chat-cap"><span class="chat-cap-icon">📊</span> "Analyse the overall customer mood"</div>
+            <div class="chat-cap"><span class="chat-cap-icon">💡</span> "What are the top next steps?"</div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chat-input" rows="1"
+          placeholder="Ask about ${stop.name}…"
+          onkeydown="handleChatKey(event)"></textarea>
+        <button class="chat-send-btn" id="chat-send" onclick="sendChatMessage()" title="Send">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="1" y1="13" x2="13" y2="1"/><polyline points="4,1 13,1 13,10"/>
+          </svg>
+        </button>
+      </div>
+    </div>`;
+
+  setTimeout(() => document.getElementById('chat-input')?.focus(), 100);
+}
+
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChatMessage();
+  }
+}
+
+// ─── Send message ─────────────────────────
+async function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  const text  = input.value.trim();
+  if (!text || chatBusy) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  addBubble('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  chatBusy = true;
+  document.getElementById('chat-send').disabled = true;
+  const typingId = addTyping();
+
+  try {
+    const result = await callClaude(chatHistory);
+    removeTyping(typingId);
+    await handleClaudeResponse(result);
+  } catch(err) {
+    removeTyping(typingId);
+    addBubble('ai', `⚠️ Connection error: ${err.message}. Please try again.`);
+  }
+
+  chatBusy = false;
+  document.getElementById('chat-send').disabled = false;
+  document.getElementById('chat-input')?.focus();
+}
+
+// ─── API call ─────────────────────────────
+function buildSystemPrompt() {
+  const stop = stops[currentStopId];
+  const isReal = v => v && typeof v === 'string' && !v.startsWith('[');
+
+  const wentWell = (stop.wentWell || [])
+    .map(x => typeof x === 'string' ? x : x.text).filter(isReal).join('\n- ') || 'Nothing noted yet';
+  const gaps = (stop.gaps || [])
+    .map(x => typeof x === 'string' ? x : x.text).filter(isReal).join('\n- ') || 'Nothing noted yet';
+  const suggestions = (stop.suggestions || [])
+    .map(x => typeof x === 'string' ? x : x.text).filter(isReal).join('\n- ') || 'Nothing noted yet';
+  const tasks = (stop.tasks || [])
+    .map(t => `[${t.status === 'done' ? '✓' : '○'}] ${t.text}${t.dueDate ? ` (due: ${t.dueDate})` : ''}`)
+    .join('\n') || 'None yet';
+  const summary = (stop.summary && !stop.summary.startsWith('[')) ? stop.summary : 'Not yet recorded';
+
+  return `You are a smart AI assistant embedded in a customer visit tracking app for the OpenGov sales team. You help with the ERP Implementation product — a modern financial management platform for US local government agencies.
+
+CURRENT CUSTOMER: ${stop.name}, ${stop.subtitle || ''}, ${stop.state || ''}
+VISIT DATE: March 2026
+
+CURRENT DATA:
+Visit Summary: ${summary}
+What Went Well:
+- ${wentWell}
+Gaps Identified:
+- ${gaps}
+Suggestions:
+- ${suggestions}
+Tasks:
+${tasks}
+
+You have tools to add feedback and tasks. Use them whenever the user asks you to add, log, record, or note something. After using a tool, briefly confirm what you did and offer a follow-up insight.
+
+For analysis questions (mood, sentiment, overall picture, next steps), give sharp, actionable answers in 3-5 bullet points. Be concise.`;
+}
+
+const AI_TOOLS = [
+  {
+    name: 'add_feedback',
+    description: 'Add a feedback item to the customer record. Use for anything the user wants to log, note, or record about the visit.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        category: {
+          type: 'string',
+          enum: ['wentWell', 'gaps', 'suggestions'],
+          description: 'wentWell = positive highlights, gaps = pain points or problems, suggestions = feature requests or ideas'
+        },
+        text: { type: 'string', description: 'The feedback text to add (concise, 1-2 sentences)' }
+      },
+      required: ['category', 'text']
+    }
+  },
+  {
+    name: 'add_task',
+    description: 'Add an action item or task to the customer task list.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        text: { type: 'string', description: 'The task description' },
+        dueDate: { type: 'string', description: 'Optional due date in YYYY-MM-DD format' }
+      },
+      required: ['text']
+    }
+  }
+];
+
+async function callClaude(messages) {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': aiApiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-5',
+      max_tokens: 1024,
+      system: buildSystemPrompt(),
+      tools: AI_TOOLS,
+      messages
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    if (response.status === 401) aiApiKey = null;
+    throw new Error(err.error?.message || `API error ${response.status}`);
+  }
+  return response.json();
+}
+
+// ─── Handle response (may include tool calls) ─────
+async function handleClaudeResponse(apiResponse) {
+  const { content, stop_reason } = apiResponse;
+
+  // Show any text blocks
+  const textBlocks = content.filter(b => b.type === 'text');
+  if (textBlocks.length > 0) {
+    addBubble('ai', textBlocks.map(b => b.text).join(''));
+  }
+
+  // If tool use requested, execute tools and follow up
+  const toolBlocks = content.filter(b => b.type === 'tool_use');
+  if (stop_reason === 'tool_use' && toolBlocks.length > 0) {
+    chatHistory.push({ role: 'assistant', content });
+
+    const toolResults = toolBlocks.map(tool => {
+      const result = executeTool(tool.name, tool.input);
+      addActionBubble(result.label, result.ok);
+      return {
+        type: 'tool_result',
+        tool_use_id: tool.id,
+        content: result.ok ? result.label : `Error: ${result.label}`
+      };
+    });
+
+    chatHistory.push({ role: 'user', content: toolResults });
+
+    // Re-render view to reflect the new data
+    if (!editMode && currentStopId !== null) renderViewMode(stops[currentStopId]);
+
+    // Get Claude's follow-up response
+    chatBusy = true;
+    const followTypingId = addTyping();
+    try {
+      const followUp = await callClaude(chatHistory);
+      removeTyping(followTypingId);
+      // Show follow-up text (no more tool calls expected)
+      const followText = followUp.content.filter(b => b.type === 'text').map(b => b.text).join('');
+      if (followText) addBubble('ai', followText);
+      chatHistory.push({ role: 'assistant', content: followUp.content });
+    } catch(err) {
+      removeTyping(followTypingId);
+    }
+    chatBusy = false;
+    if (document.getElementById('chat-send')) document.getElementById('chat-send').disabled = false;
+
+  } else {
+    chatHistory.push({ role: 'assistant', content });
+  }
+}
+
+// ─── Tool execution ───────────────────────
+function executeTool(name, input) {
+  const stop = stops[currentStopId];
+  if (name === 'add_feedback') {
+    const { category, text } = input;
+    const labels = { wentWell: 'What Went Well', gaps: 'Gaps Identified', suggestions: 'Suggestions' };
+    if (category === 'wentWell') {
+      stop.wentWell = stop.wentWell || [];
+      stop.wentWell.push(text);
+    } else {
+      stop[category] = stop[category] || [];
+      stop[category].push({ text, status: 'Noted' });
+    }
+    return { ok: true, label: `✓ Added to ${labels[category] || category}: "${text}"` };
+  }
+  if (name === 'add_task') {
+    stop.tasks = stop.tasks || [];
+    stop.tasks.push({ text: input.text, dueDate: input.dueDate || '', status: 'todo' });
+    return { ok: true, label: `✓ Task added: "${input.text}"${input.dueDate ? ` · due ${input.dueDate}` : ''}` };
+  }
+  return { ok: false, label: 'Unknown tool' };
+}
+
+// ─── Chat UI helpers ──────────────────────
+function addBubble(role, markdown) {
+  const msgs = document.getElementById('chat-messages');
+  if (!msgs) return;
+
+  const row = document.createElement('div');
+  row.className = `chat-row ${role}`;
+
+  if (role === 'ai') {
+    const av = document.createElement('div');
+    av.className = 'chat-avatar ai-av';
+    av.textContent = '✦';
+    row.appendChild(av);
+  }
+
+  const bubble = document.createElement('div');
+  bubble.className = `chat-bubble ${role}`;
+  bubble.innerHTML = renderChatMarkdown(markdown);
+  row.appendChild(bubble);
+
+  msgs.appendChild(row);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addActionBubble(label, ok) {
+  const msgs = document.getElementById('chat-messages');
+  if (!msgs) return;
+  const row = document.createElement('div');
+  row.className = 'chat-action-row';
+  const pill = document.createElement('div');
+  pill.className = `chat-action-bubble ${ok ? 'success' : 'error'}`;
+  pill.textContent = label;
+  row.appendChild(pill);
+  msgs.appendChild(row);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addTyping() {
+  const msgs = document.getElementById('chat-messages');
+  if (!msgs) return null;
+  const id = 'typing-' + Date.now();
+  const row = document.createElement('div');
+  row.className = 'chat-row ai';
+  row.id = id;
+
+  const av = document.createElement('div');
+  av.className = 'chat-avatar ai-av';
+  av.textContent = '✦';
+
+  const dots = document.createElement('div');
+  dots.className = 'chat-typing';
+  dots.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+
+  row.appendChild(av);
+  row.appendChild(dots);
+  msgs.appendChild(row);
+  msgs.scrollTop = msgs.scrollHeight;
+  return id;
+}
+
+function removeTyping(id) {
+  if (id) document.getElementById(id)?.remove();
+}
+
+function renderChatMarkdown(text) {
+  // Escape HTML
+  let h = text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Bold
+  h = h.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  // Inline code
+  h = h.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Bullets
+  h = h.replace(/^[-•]\s(.+)$/gm, '<li>$1</li>');
+  h = h.replace(/(<li>[\s\S]*?<\/li>\n?)+/g, m => `<ul>${m}</ul>`);
+  h = h.replace(/<\/ul>\s*<ul>/g, '');
+  // Paragraphs
+  const parts = h.split(/\n\n+/);
+  return parts.map(p => {
+    p = p.trim();
+    if (!p) return '';
+    if (p.startsWith('<ul>') || p.startsWith('<li>')) return p;
+    return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+  }).filter(Boolean).join('');
+}
 </script>
 </body>
 </html>
