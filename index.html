@@ -507,26 +507,12 @@
       margin-bottom: 16px; padding-bottom: 10px;
       border-bottom: 1px solid var(--border-soft);
     }
-    .tasks-section-title { font-size: 13px; font-weight: 700; color: var(--og-purple); }
     .tasks-count { font-size: 18px; font-weight: 800; color: var(--og-purple); }
-
-    /* Phase groups — view mode */
-    .task-phase-group { margin-bottom: 18px; }
-    .task-phase-group:last-child { margin-bottom: 0; }
-    .task-phase-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .task-phase-name {
-      font-size: 10px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.1px; color: var(--text-sub);
-    }
-    .task-phase-current-badge {
-      font-size: 10px; font-weight: 700; padding: 2px 9px;
-      border-radius: 20px; background: var(--og-purple-light); color: var(--og-purple);
-    }
 
     /* Task items — view mode */
     .task-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 8px 0; border-bottom: 1px solid var(--border-soft);
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 0; border-bottom: 1px solid var(--border-soft);
       font-size: 13px; line-height: 1.5;
     }
     .task-item:last-child { border-bottom: none; }
@@ -534,100 +520,97 @@
       flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px;
       border: 1.5px solid var(--border); display: flex;
       align-items: center; justify-content: center;
-      font-size: 10px; margin-top: 1px; color: var(--text-dim);
+      font-size: 10px; color: var(--text-dim);
     }
-    .task-item.done .task-checkbox  { background: var(--og-green); border-color: var(--og-green); color: #fff; }
-    .task-item.snoozed .task-checkbox { background: var(--og-amber-light); border-color: var(--og-amber); color: var(--og-amber); }
+    .task-item.done .task-checkbox { background: var(--og-green); border-color: var(--og-green); color: #fff; }
     .task-text { flex: 1; color: var(--text-main); }
-    .task-item.done .task-text    { text-decoration: line-through; color: var(--text-dim); }
-    .task-item.snoozed .task-text { color: var(--text-sub); }
-    .task-snooze-tag {
-      flex-shrink: 0; font-size: 10px; font-weight: 600; padding: 2px 8px;
-      border-radius: 20px; background: var(--og-amber-light); color: var(--og-amber); margin-top: 2px;
+    .task-item.done .task-text { text-decoration: line-through; color: var(--text-dim); }
+    .task-due-tag {
+      flex-shrink: 0; font-size: 11px; font-weight: 600; padding: 2px 8px;
+      border-radius: 20px; background: var(--bg-section); color: var(--text-sub);
     }
+    .task-due-tag.overdue { background: #fff1f2; color: #e11d48; }
     .tasks-empty {
       text-align: center; padding: 24px 12px;
       font-size: 13px; color: var(--text-dim); font-style: italic;
     }
 
-    /* Phase groups — edit mode */
-    .task-phase-edit-group {
-      background: #faf9ff; border: 1.5px solid var(--border);
-      border-radius: 10px; padding: 14px 16px; margin-bottom: 12px;
-    }
-    .task-phase-edit-group.is-current { border-color: var(--og-purple); }
-    .task-phase-edit-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .task-phase-input {
-      flex: 1; border: 1.5px solid var(--border); border-radius: 7px;
-      padding: 5px 10px; font-size: 11px; font-weight: 800;
-      font-family: 'DM Sans', sans-serif; color: var(--text-main);
-      outline: none; background: #fff; text-transform: uppercase; letter-spacing: 0.5px;
-      transition: border-color 0.15s;
-    }
-    .task-phase-input:focus { border-color: var(--og-purple); }
-    .task-set-current-btn {
-      flex-shrink: 0; font-size: 10px; font-weight: 700;
-      padding: 5px 10px; border-radius: 20px;
-      border: 1.5px solid var(--border); background: none;
-      color: var(--text-dim); cursor: pointer; font-family: 'DM Sans', sans-serif;
-      transition: all 0.15s; white-space: nowrap;
-    }
-    .task-set-current-btn:hover { border-color: var(--og-purple); color: var(--og-purple); }
-    .task-set-current-btn.active { background: var(--og-purple-light); color: var(--og-purple); border-color: var(--og-purple); }
-    .task-delete-phase-btn {
-      flex-shrink: 0; width: 26px; height: 26px; background: none;
-      border: 1.5px solid var(--border); border-radius: 6px;
-      color: var(--text-dim); font-size: 14px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; transition: all 0.15s;
-    }
-    .task-delete-phase-btn:hover { border-color: #ef4444; color: #ef4444; }
-
     /* Task rows — edit mode */
     .task-edit-row {
-      display: flex; align-items: flex-start; gap: 6px;
-      padding: 5px 0; border-bottom: 1px solid var(--border-soft);
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 1px solid var(--border-soft);
     }
     .task-edit-row:last-of-type { border-bottom: none; }
     .task-status-toggle {
-      flex-shrink: 0; width: 28px; height: 28px; margin-top: 3px;
-      border-radius: 6px; border: 1.5px solid var(--border);
+      flex-shrink: 0; width: 22px; height: 22px;
+      border-radius: 4px; border: 1.5px solid var(--border);
       background: #fff; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+      font-size: 11px; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
     }
-    .task-status-toggle.done    { background: var(--og-green); border-color: var(--og-green); color: #fff; }
-    .task-status-toggle.snoozed { background: var(--og-amber-light); border-color: var(--og-amber); color: var(--og-amber); }
-    .task-status-toggle.todo    { color: var(--text-dim); }
+    .task-status-toggle.done { background: var(--og-green); border-color: var(--og-green); color: #fff; }
+    .task-status-toggle.todo { color: var(--text-dim); }
     .task-edit-text {
       flex: 1; border: 1.5px solid var(--border); border-radius: 7px;
-      padding: 6px 10px; font-size: 13px; line-height: 1.45;
+      padding: 6px 10px; font-size: 13px;
       font-family: 'DM Sans', sans-serif; color: var(--text-main);
-      outline: none; resize: none; min-height: 32px;
-      transition: border-color 0.15s; background: #fff;
+      outline: none; background: #fff; transition: border-color 0.15s;
     }
-    .task-edit-text:focus { border-color: var(--og-purple); }
-    .task-snooze-date-input {
-      flex-shrink: 0; width: 128px; border: 1.5px solid var(--og-amber);
-      border-radius: 7px; padding: 5px 7px; font-size: 11px; font-weight: 600;
-      font-family: 'DM Sans', sans-serif; color: var(--og-amber);
-      background: var(--og-amber-light); outline: none; cursor: pointer; margin-top: 3px;
+    .task-edit-text:focus { border-color: var(--og-purple); outline: none; }
+    .task-edit-text.done-text { text-decoration: line-through; color: var(--text-dim); }
+    .task-due-input {
+      flex-shrink: 0; width: 130px; border: 1.5px solid var(--border);
+      border-radius: 7px; padding: 6px 8px; font-size: 12px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; color: var(--text-sub);
+      background: #fff; outline: none; cursor: pointer;
+      transition: border-color 0.15s;
     }
+    .task-due-input:focus { border-color: var(--og-purple); }
+
+    /* Add task button */
     .add-task-btn {
       display: flex; align-items: center; justify-content: center; gap: 6px;
-      background: none; border: 1.5px dashed var(--border); border-radius: 7px;
-      padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--text-dim);
-      cursor: pointer; width: 100%; margin-top: 8px; box-sizing: border-box;
+      background: none; border: 1.5px dashed var(--border); border-radius: 8px;
+      padding: 8px 12px; font-size: 12px; font-weight: 600; color: var(--text-dim);
+      cursor: pointer; width: 100%; margin-top: 10px; box-sizing: border-box;
       transition: all 0.15s; font-family: 'DM Sans', sans-serif;
     }
     .add-task-btn:hover { border-color: var(--og-purple); color: var(--og-purple); background: #faf9ff; }
-    .add-phase-btn {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      background: none; border: 1.5px dashed var(--og-purple); border-radius: 10px;
-      padding: 10px 12px; font-size: 12px; font-weight: 700; color: var(--og-purple);
-      cursor: pointer; width: 100%; margin-top: 4px; box-sizing: border-box;
-      transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+
+    /* Inline add-task form */
+    .task-add-form {
+      margin-top: 10px; padding: 12px 14px; background: #faf9ff;
+      border: 1.5px solid var(--og-purple); border-radius: 10px;
+      display: flex; flex-direction: column; gap: 8px;
     }
-    .add-phase-btn:hover { background: var(--og-purple-light); }
+    .task-add-row { display: flex; gap: 8px; align-items: center; }
+    .task-add-input {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 7px;
+      padding: 7px 10px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+      color: var(--text-main); outline: none; background: #fff; transition: border-color 0.15s;
+    }
+    .task-add-input:focus { border-color: var(--og-purple); }
+    .task-add-date {
+      flex-shrink: 0; width: 130px; border: 1.5px solid var(--border);
+      border-radius: 7px; padding: 7px 8px; font-size: 12px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; color: var(--text-sub);
+      background: #fff; outline: none; cursor: pointer; transition: border-color 0.15s;
+    }
+    .task-add-date:focus { border-color: var(--og-purple); }
+    .task-add-actions { display: flex; gap: 6px; justify-content: flex-end; }
+    .task-add-save {
+      padding: 6px 16px; font-size: 12px; font-weight: 700;
+      background: var(--og-purple); color: #fff; border: none; border-radius: 7px;
+      cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s;
+    }
+    .task-add-save:hover { background: var(--og-purple-dark); }
+    .task-add-cancel {
+      padding: 6px 14px; font-size: 12px; font-weight: 600;
+      background: none; color: var(--text-sub); border: 1.5px solid var(--border);
+      border-radius: 7px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+    .task-add-cancel:hover { border-color: var(--text-sub); color: var(--text-main); }
   </style>
 </head>
 <body>
@@ -1005,9 +988,14 @@ stops.forEach(stop => {
       typeof x === 'string' ? { text: x, status: 'Noted' } : x
     );
   });
-  // Ensure tasks arrays exist
+  // Ensure tasks array exists
   if (!stop.tasks) stop.tasks = [];
-  if (!stop.currentPhase) stop.currentPhase = null;
+  // Migrate legacy phase/snooze tasks to simple {text, dueDate, status}
+  stop.tasks = stop.tasks.map(t => ({
+    text: t.text || '',
+    dueDate: t.dueDate || t.snoozeUntil || '',
+    status: (t.status === 'done') ? 'done' : 'todo'
+  })).filter(t => t.text);
 });
 
 // ── EDIT MODE STATE ──
@@ -1263,64 +1251,29 @@ function renderTasksView(stop) {
   const today = new Date(); today.setHours(0,0,0,0);
 
   if (tasks.length === 0) {
-    container.innerHTML = `<div class="tasks-empty">No tasks yet. Unlock Manage Feedback to plan tasks for this stop.</div>`;
+    container.innerHTML = `<div class="tasks-empty">No tasks yet. Click Manage Feedback to add tasks for this stop.</div>`;
     if (countEl) countEl.textContent = '—';
     return;
   }
 
-  // Group by phase, preserving insertion order
-  const phaseOrder = [];
-  const byPhase = {};
-  tasks.forEach(task => {
-    const phase = task.phase || 'General';
-    if (!byPhase[phase]) { byPhase[phase] = []; phaseOrder.push(phase); }
-    // Resolve effective status (expired snooze → todo)
-    let eff = task.status;
-    if (eff === 'snoozed' && task.snoozeUntil) {
-      if (new Date(task.snoozeUntil + 'T00:00:00') <= today) eff = 'todo';
-    }
-    byPhase[phase].push({ ...task, eff });
-  });
-
-  // Count open tasks
-  const openCount = tasks.filter(t => {
-    if (t.status === 'done') return false;
-    if (t.status === 'snoozed' && t.snoozeUntil && new Date(t.snoozeUntil + 'T00:00:00') > today) return false;
-    return true;
-  }).length;
+  const openCount = tasks.filter(t => t.status !== 'done').length;
   if (countEl) countEl.textContent = openCount > 0 ? openCount : '✓';
 
-  // Current phase first
-  const orderedPhases = [...phaseOrder];
-  if (stop.currentPhase && orderedPhases.includes(stop.currentPhase)) {
-    orderedPhases.splice(orderedPhases.indexOf(stop.currentPhase), 1);
-    orderedPhases.unshift(stop.currentPhase);
-  }
-
   let html = '';
-  orderedPhases.forEach(phase => {
-    const isCurrent = phase === stop.currentPhase;
-    html += `<div class="task-phase-group">
-      <div class="task-phase-header">
-        <span class="task-phase-name">${phase}</span>
-        ${isCurrent ? `<span class="task-phase-current-badge">● Current Phase</span>` : ''}
-      </div>`;
-    byPhase[phase].forEach(task => {
-      const s = task.eff;
-      const icon = s === 'done' ? '✓' : s === 'snoozed' ? '⏰' : '';
-      let snoozeTag = '';
-      if (s === 'snoozed' && task.snoozeUntil) {
-        const d = new Date(task.snoozeUntil + 'T00:00:00');
-        const fmt = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        snoozeTag = `<span class="task-snooze-tag">⏰ Snoozed · ${fmt}</span>`;
-      }
-      html += `<div class="task-item ${s}">
-        <div class="task-checkbox">${icon}</div>
-        <span class="task-text">${task.text}</span>
-        ${snoozeTag}
-      </div>`;
-    });
-    html += `</div>`;
+  tasks.forEach(task => {
+    const done = task.status === 'done';
+    let duePill = '';
+    if (task.dueDate) {
+      const d = new Date(task.dueDate + 'T00:00:00');
+      const fmt = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const isOverdue = !done && d < today;
+      duePill = `<span class="task-due-tag${isOverdue ? ' overdue' : ''}">${isOverdue ? '⚠ ' : ''}${fmt}</span>`;
+    }
+    html += `<div class="task-item ${done ? 'done' : ''}">
+      <div class="task-checkbox">${done ? '✓' : ''}</div>
+      <span class="task-text">${task.text}</span>
+      ${duePill}
+    </div>`;
   });
   container.innerHTML = html;
 }
@@ -1335,58 +1288,40 @@ function renderTasksEdit(stop) {
   if (countEl) countEl.textContent = '✎';
 
   const tasks = stop.tasks || [];
-  const phaseOrder = [];
-  const byPhase = {};
-  tasks.forEach(task => {
-    const phase = task.phase || 'General';
-    if (!byPhase[phase]) { byPhase[phase] = []; phaseOrder.push(phase); }
-    byPhase[phase].push(task);
-  });
-
-  // Current phase first
-  const orderedPhases = [...phaseOrder];
-  if (stop.currentPhase && orderedPhases.includes(stop.currentPhase)) {
-    orderedPhases.splice(orderedPhases.indexOf(stop.currentPhase), 1);
-    orderedPhases.unshift(stop.currentPhase);
-  }
-
   container.innerHTML = '';
 
   function buildTaskRow(task) {
     const row = document.createElement('div');
     row.className = 'task-edit-row';
 
-    // Status cycle button: todo → done → snoozed → todo
+    // Status toggle: todo ↔ done
     const statusBtn = document.createElement('button');
     const status0 = task ? task.status : 'todo';
     statusBtn.dataset.status = status0;
-    const icons = { todo: '☐', done: '✓', snoozed: '⏰' };
     statusBtn.className = 'task-status-toggle ' + status0;
-    statusBtn.textContent = icons[status0];
-    statusBtn.title = 'Click to cycle: Todo → Done → Snoozed';
+    statusBtn.textContent = status0 === 'done' ? '✓' : '';
+    statusBtn.title = 'Toggle done';
     statusBtn.addEventListener('click', () => {
-      const cycle = { todo: 'done', done: 'snoozed', snoozed: 'todo' };
-      const next = cycle[statusBtn.dataset.status];
+      const next = statusBtn.dataset.status === 'done' ? 'todo' : 'done';
       statusBtn.dataset.status = next;
       statusBtn.className = 'task-status-toggle ' + next;
-      statusBtn.textContent = icons[next];
-      snoozeInput.style.display = next === 'snoozed' ? '' : 'none';
+      statusBtn.textContent = next === 'done' ? '✓' : '';
+      textInput.className = 'task-edit-text' + (next === 'done' ? ' done-text' : '');
     });
     row.appendChild(statusBtn);
 
     const textInput = document.createElement('input');
-    textInput.className = 'task-edit-text';
+    textInput.className = 'task-edit-text' + (status0 === 'done' ? ' done-text' : '');
     textInput.value = task ? task.text : '';
     textInput.placeholder = 'Task description…';
     row.appendChild(textInput);
 
-    const snoozeInput = document.createElement('input');
-    snoozeInput.type = 'date';
-    snoozeInput.className = 'task-snooze-date-input';
-    snoozeInput.value = (task && task.snoozeUntil) ? task.snoozeUntil : '';
-    snoozeInput.style.display = (task && task.status === 'snoozed') ? '' : 'none';
-    snoozeInput.title = 'Snooze until this date';
-    row.appendChild(snoozeInput);
+    const dueDateInput = document.createElement('input');
+    dueDateInput.type = 'date';
+    dueDateInput.className = 'task-due-input';
+    dueDateInput.value = (task && task.dueDate) ? task.dueDate : '';
+    dueDateInput.title = 'Expected date';
+    row.appendChild(dueDateInput);
 
     const delBtn = document.createElement('button');
     delBtn.className = 'edit-delete-btn';
@@ -1398,86 +1333,74 @@ function renderTasksEdit(stop) {
     return row;
   }
 
-  function buildPhaseGroup(phase, phaseTasks) {
-    const isCurrent = phase === stop.currentPhase;
-    const group = document.createElement('div');
-    group.className = 'task-phase-edit-group' + (isCurrent ? ' is-current' : '');
+  // Render existing tasks
+  tasks.forEach(task => container.appendChild(buildTaskRow(task)));
 
-    const header = document.createElement('div');
-    header.className = 'task-phase-edit-header';
+  // Add task button
+  const addTaskBtn = document.createElement('button');
+  addTaskBtn.className = 'add-task-btn';
+  addTaskBtn.innerHTML = '+ Add Task';
+  addTaskBtn.addEventListener('click', () => {
+    addTaskBtn.style.display = 'none';
+    const form = document.createElement('div');
+    form.className = 'task-add-form';
 
-    const phaseInput = document.createElement('input');
-    phaseInput.className = 'task-phase-input';
-    phaseInput.value = phase;
-    phaseInput.placeholder = 'Phase name';
-    header.appendChild(phaseInput);
+    const row = document.createElement('div');
+    row.className = 'task-add-row';
 
-    const currentBtn = document.createElement('button');
-    currentBtn.className = 'task-set-current-btn' + (isCurrent ? ' active' : '');
-    currentBtn.textContent = isCurrent ? '● Current' : 'Set as Current';
-    currentBtn.addEventListener('click', () => {
-      stop.currentPhase = phaseInput.value.trim() || phase;
-      container.querySelectorAll('.task-set-current-btn').forEach(b => {
-        b.classList.remove('active'); b.textContent = 'Set as Current';
-      });
-      container.querySelectorAll('.task-phase-edit-group').forEach(g => g.classList.remove('is-current'));
-      currentBtn.classList.add('active');
-      currentBtn.textContent = '● Current';
-      group.classList.add('is-current');
+    const textInput = document.createElement('input');
+    textInput.className = 'task-add-input';
+    textInput.placeholder = 'Task description…';
+    row.appendChild(textInput);
+
+    const dateInput = document.createElement('input');
+    dateInput.type = 'date';
+    dateInput.className = 'task-add-date';
+    dateInput.title = 'Expected date (optional)';
+    row.appendChild(dateInput);
+
+    form.appendChild(row);
+
+    const actions = document.createElement('div');
+    actions.className = 'task-add-actions';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'task-add-cancel';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.type = 'button';
+    cancelBtn.addEventListener('click', () => {
+      form.remove();
+      addTaskBtn.style.display = '';
     });
-    header.appendChild(currentBtn);
 
-    const delPhaseBtn = document.createElement('button');
-    delPhaseBtn.className = 'task-delete-phase-btn';
-    delPhaseBtn.innerHTML = '×';
-    delPhaseBtn.title = 'Delete phase and all its tasks';
-    delPhaseBtn.addEventListener('click', () => {
-      if (stop.currentPhase === phase) stop.currentPhase = null;
-      group.remove();
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'task-add-save';
+    saveBtn.textContent = 'Add Task';
+    saveBtn.type = 'button';
+    saveBtn.addEventListener('click', () => {
+      const text = textInput.value.trim();
+      if (!text) { textInput.focus(); return; }
+      const newTask = { text, dueDate: dateInput.value || '', status: 'todo' };
+      const newRow = buildTaskRow(newTask);
+      container.insertBefore(newRow, form);
+      form.remove();
+      addTaskBtn.style.display = '';
     });
-    header.appendChild(delPhaseBtn);
-    group.appendChild(header);
 
-    const rowsContainer = document.createElement('div');
-    rowsContainer.className = 'task-edit-rows';
-    (phaseTasks || []).forEach(task => rowsContainer.appendChild(buildTaskRow(task)));
-    group.appendChild(rowsContainer);
-
-    const addTaskBtn = document.createElement('button');
-    addTaskBtn.className = 'add-task-btn';
-    addTaskBtn.innerHTML = '+ Add task';
-    addTaskBtn.addEventListener('click', () => {
-      const newRow = buildTaskRow(null);
-      rowsContainer.appendChild(newRow);
-      newRow.querySelector('.task-edit-text').focus();
+    // Also save on Enter in text input
+    textInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') saveBtn.click();
+      if (e.key === 'Escape') cancelBtn.click();
     });
-    group.appendChild(addTaskBtn);
 
-    return group;
-  }
+    actions.appendChild(cancelBtn);
+    actions.appendChild(saveBtn);
+    form.appendChild(actions);
 
-  orderedPhases.forEach(phase => container.appendChild(buildPhaseGroup(phase, byPhase[phase])));
-
-  if (orderedPhases.length === 0) {
-    const empty = document.createElement('div');
-    empty.className = 'tasks-empty';
-    empty.textContent = 'No phases yet — click "+ Add Phase" below to get started.';
-    container.appendChild(empty);
-  }
-
-  const addPhaseBtn = document.createElement('button');
-  addPhaseBtn.className = 'add-phase-btn';
-  addPhaseBtn.innerHTML = '+ Add Phase';
-  addPhaseBtn.addEventListener('click', () => {
-    // Remove empty-state hint if present
-    const hint = container.querySelector('.tasks-empty');
-    if (hint) hint.remove();
-    const newGroup = buildPhaseGroup('New Phase', []);
-    container.insertBefore(newGroup, addPhaseBtn);
-    const inp = newGroup.querySelector('.task-phase-input');
-    inp.select(); inp.focus();
+    container.insertBefore(form, addTaskBtn);
+    textInput.focus();
   });
-  container.appendChild(addPhaseBtn);
+  container.appendChild(addTaskBtn);
 }
 
 // ─────────────────────────────────────────
@@ -1490,22 +1413,15 @@ function saveTaskEdits() {
   if (!container) return;
 
   const tasks = [];
-  container.querySelectorAll('.task-phase-edit-group').forEach(group => {
-    const phaseInput = group.querySelector('.task-phase-input');
-    const phase = phaseInput ? phaseInput.value.trim() : 'General';
-    const isCurrentPhase = group.querySelector('.task-set-current-btn.active') !== null;
-    if (isCurrentPhase) stop.currentPhase = phase;
-
-    group.querySelectorAll('.task-edit-row').forEach(row => {
-      const textInput  = row.querySelector('.task-edit-text');
-      const statusBtn  = row.querySelector('.task-status-toggle');
-      const snoozeInput= row.querySelector('.task-snooze-date-input');
-      const text = textInput ? textInput.value.trim() : '';
-      if (!text) return;
-      const status = statusBtn ? (statusBtn.dataset.status || 'todo') : 'todo';
-      const snoozeUntil = (snoozeInput && status === 'snoozed' && snoozeInput.value) ? snoozeInput.value : null;
-      tasks.push({ text, phase, status, snoozeUntil });
-    });
+  container.querySelectorAll('.task-edit-row').forEach(row => {
+    const textInput   = row.querySelector('.task-edit-text');
+    const statusBtn   = row.querySelector('.task-status-toggle');
+    const dueDateInput = row.querySelector('.task-due-input');
+    const text = textInput ? textInput.value.trim() : '';
+    if (!text) return;
+    const status = statusBtn ? (statusBtn.dataset.status || 'todo') : 'todo';
+    const dueDate = dueDateInput ? dueDateInput.value : '';
+    tasks.push({ text, dueDate, status });
   });
   stop.tasks = tasks;
 }
