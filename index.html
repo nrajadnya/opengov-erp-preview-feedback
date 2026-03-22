@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('key') !== 'opengov2026') {
+        document.addEventListener('DOMContentLoaded', function() {
+          document.body.innerHTML = '';
+        });
+        document.write('<style>*{margin:0;padding:0;box-sizing:border-box}body{display:flex;align-items:center;justify-content:center;height:100vh;background:#f4f4f6;font-family:sans-serif}</style><body><p style="color:#888;font-size:14px;">Access restricted. Please use the link provided by your OpenGov contact.</p></body>');
+        document.close();
+      }
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>India → US Customer Visit · OpenGov Field Insights 2026</title>
