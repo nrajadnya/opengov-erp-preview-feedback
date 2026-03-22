@@ -1,7 +1,0 @@
-{
-  "name": "opengov-erp-preview-feedback",
-  "version": "1.0.0",
-  "dependencies": {
-    "@aws-sdk/client-bedrock-runtime": "^3.600.0"
-  }
-}
