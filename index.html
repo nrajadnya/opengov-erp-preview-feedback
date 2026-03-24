@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <script>
     (function() {
       var params = new URLSearchParams(window.location.search);
@@ -13,9 +14,8 @@
       }
     })();
   </script>
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>India â US Customer Visit Â· OpenGov Field Insights 2026</title>
+  <title>India &rarr; US Customer Visit &middot; OpenGov Field Insights 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet" />
@@ -54,13 +54,13 @@
       position: fixed; width: 100%;
     }
 
-    /* ââ TOP STRIP ââ */
+    /* -- TOP STRIP -- */
     .top-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6px;
       background: var(--og-purple); z-index: 600;
     }
 
-    /* ââ HEADER ââ */
+    /* -- HEADER -- */
     header {
       position: fixed; top: 6px; left: 0; right: 0; z-index: 500;
       height: 50px;
@@ -89,14 +89,14 @@
       padding: 4px 12px; font-size: 12px;
     }
 
-    /* ââ PAGE SHELL ââ */
+    /* -- PAGE SHELL -- */
     .page {
       display: flex; flex-direction: column;
       height: 100vh; height: 100dvh; /* dvh for mobile browsers */
       padding-top: 56px; overflow: hidden;
     }
 
-    /* ââ MAP STRIP ââ */
+    /* -- MAP STRIP -- */
     .map-strip {
       flex-shrink: 0; position: relative;
       height: 210px; border-bottom: 1px solid var(--border);
@@ -150,7 +150,7 @@
     }
     .stop-pill.active .pill-num { background: rgba(255,255,255,0.25); color: #fff; }
 
-    /* ââ CONTENT AREA ââ */
+    /* -- CONTENT AREA -- */
     .content-area {
       flex: 1; min-height: 0;
       overflow-y: auto;
@@ -174,7 +174,7 @@
     .welcome-screen h2 { font-size: 18px; font-weight: 700; color: var(--text-dark); }
     .welcome-screen p { font-size: 14px; color: var(--text-sub); max-width: 340px; line-height: 1.7; }
 
-    /* ââ CUSTOMER DETAIL ââ */
+    /* -- CUSTOMER DETAIL -- */
     .customer-detail { display: none; flex-direction: column; }
     .customer-detail.visible { display: flex; }
 
@@ -307,7 +307,7 @@
     .customer-detail.visible ~ .side-nav-btn,
     .side-nav-btn.show { display: flex; }
 
-    /* ââ MANAGE FEEDBACK BUTTON ââ */
+    /* -- MANAGE FEEDBACK BUTTON -- */
     .manage-btn {
       display: flex; align-items: center; gap: 6px;
       background: var(--og-purple); color: #fff;
@@ -323,7 +323,7 @@
     }
     .manage-btn.active:hover { background: #d9590a; }
 
-    /* ââ PASSWORD MODAL ââ */
+    /* -- PASSWORD MODAL -- */
     .pw-overlay {
       position: fixed; inset: 0; z-index: 3000;
       background: rgba(0,0,0,0.45);
@@ -360,7 +360,7 @@
     .pw-btn.secondary { background: none; color: var(--text-sub); }
     .pw-btn.secondary:hover { border-color: var(--text-dim); color: var(--text-main); }
 
-    /* ââ EDIT MODE BANNER ââ */
+    /* -- EDIT MODE BANNER -- */
     .edit-banner {
       display: none; flex-shrink: 0;
       align-items: center; justify-content: space-between;
@@ -378,7 +378,7 @@
     }
     .edit-save-btn:hover { background: var(--og-purple-dark); }
 
-    /* ââ EDIT MODE FIELDS ââ */
+    /* -- EDIT MODE FIELDS -- */
     .edit-summary-textarea {
       width: 100%; min-height: 72px;
       border: 1.5px solid var(--og-purple-light); border-radius: 8px;
@@ -430,7 +430,7 @@
     }
     .add-item-btn:hover { border-color: var(--og-purple); color: var(--og-purple); background: #faf9ff; }
 
-    /* ââ STATUS BADGE (view mode) ââ */
+    /* -- STATUS BADGE (view mode) -- */
     .status-badge {
       display: inline-block; font-size: 10px; font-weight: 700;
       padding: 2px 7px; border-radius: 20px;
@@ -440,7 +440,7 @@
     .status-badge.noted { background: var(--bg-section); color: var(--text-dim); }
     .status-badge.prioritised { background: var(--og-orange-light); color: var(--og-orange); }
 
-    /* Journey nav footer â lives OUTSIDE the scroll container */
+    /* Journey nav footer &mdash; lives OUTSIDE the scroll container */
     .journey-footer {
       display: none; /* hidden by default, shown when a stop is selected */
       flex-shrink: 0;
@@ -495,7 +495,7 @@
       color: var(--text-dark) !important; padding: 5px 10px !important;
     }
 
-    /* ââ TASKS SECTION ââ */
+    /* -- TASKS SECTION -- */
     .sh-tasks { color: var(--og-purple); }
     .tasks-section {
       background: #fff; border: 1px solid var(--border);
@@ -509,7 +509,7 @@
     }
     .tasks-count { font-size: 18px; font-weight: 800; color: var(--og-purple); }
 
-    /* Task items â view mode */
+    /* Task items &mdash; view mode */
     .task-item {
       display: flex; align-items: center; gap: 10px;
       padding: 9px 0; border-bottom: 1px solid var(--border-soft);
@@ -535,7 +535,7 @@
       font-size: 13px; color: var(--text-dim); font-style: italic;
     }
 
-    /* Task rows â edit mode */
+    /* Task rows &mdash; edit mode */
     .task-edit-row {
       display: flex; align-items: center; gap: 8px;
       padding: 6px 0; border-bottom: 1px solid var(--border-soft);
@@ -630,21 +630,21 @@
     <span class="hdr-tag">March 2026</span>
     <span class="hdr-pill" id="hdr-pill">Select a stop</span>
     <button class="manage-btn" id="manage-btn" onclick="openManageFeedback()" title="Edit feedback for this stop">
-      â Manage Feedback
+      &#x270E; Manage Feedback
     </button>
   </div>
 </header>
 
 <!-- Edit mode banner (shown below header when editing) -->
 <div class="edit-banner" id="edit-banner">
-  <span class="edit-banner-label">â &nbsp;Edit mode â changes auto-save when you switch stops</span>
-  <button class="edit-save-btn" onclick="lockEditing()">â Done Editing</button>
+  <span class="edit-banner-label">&#x270E; &nbsp;Edit mode &mdash; changes auto-save when you switch stops</span>
+  <button class="edit-save-btn" onclick="lockEditing()">&#x2713; Done Editing</button>
 </div>
 
 <!-- Password modal -->
 <div class="pw-overlay hidden" id="pw-overlay">
   <div class="pw-modal">
-    <div class="pw-title">ð Manage Feedback</div>
+    <div class="pw-title">&#x1F512; Manage Feedback</div>
     <div class="pw-sub">Enter the editor password to unlock feedback editing for all stops.</div>
     <input class="pw-input" id="pw-input" type="password" placeholder="Password"
       onkeydown="if(event.key==='Enter') checkPassword()" />
@@ -698,7 +698,7 @@
         <!-- Summary -->
         <div class="summary-block">
           <div class="section-heading sh-summary">Visit Summary</div>
-          <p class="summary-text" id="summary-text">â</p>
+          <p class="summary-text" id="summary-text">&mdash;</p>
         </div>
 
         <!-- 3-col grid -->
@@ -707,7 +707,7 @@
           <div class="insight-col col-well">
             <div class="col-header">
               <span class="col-title ct-well">What Went Well</span>
-              <span class="col-count cc-well" id="count-well">â</span>
+              <span class="col-count cc-well" id="count-well">&mdash;</span>
             </div>
             <div id="items-well"></div>
           </div>
@@ -715,7 +715,7 @@
           <div class="insight-col col-gap">
             <div class="col-header">
               <span class="col-title ct-gap">Gaps Identified</span>
-              <span class="col-count cc-gap" id="count-gaps">â</span>
+              <span class="col-count cc-gap" id="count-gaps">&mdash;</span>
             </div>
             <div id="items-gaps"></div>
           </div>
@@ -723,7 +723,7 @@
           <div class="insight-col col-suggestion">
             <div class="col-header">
               <span class="col-title ct-suggestion">Suggestions & Ideas</span>
-              <span class="col-count cc-suggestion" id="count-suggestions">â</span>
+              <span class="col-count cc-suggestion" id="count-suggestions">&mdash;</span>
             </div>
             <div id="items-suggestions"></div>
           </div>
@@ -733,7 +733,7 @@
         <div class="tasks-section" id="tasks-section">
           <div class="tasks-section-header">
             <span class="section-heading sh-tasks" style="margin-bottom:0">Tasks</span>
-            <span class="tasks-count" id="tasks-count">â</span>
+            <span class="tasks-count" id="tasks-count">&mdash;</span>
           </div>
           <div id="tasks-view"></div>
         </div>
@@ -748,24 +748,24 @@
 
   </div><!-- /content-area -->
 
-  <!-- Footer nav â outside scroll area so it never gets buried -->
+  <!-- Footer nav &mdash; outside scroll area so it never gets buried -->
   <div class="journey-footer" id="journey-footer">
-    <button class="jnav-btn" id="btn-prev" onclick="stepStop(-1)">â Previous</button>
+    <button class="jnav-btn" id="btn-prev" onclick="stepStop(-1)">&larr; Previous</button>
     <div class="progress-row" id="progress-row"></div>
-    <button class="jnav-btn primary" id="btn-next" onclick="stepStop(1)">Next â</button>
+    <button class="jnav-btn primary" id="btn-next" onclick="stepStop(1)">Next &rarr;</button>
   </div>
 
 </div><!-- /page -->
 
 <script>
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  DATA
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 const stops = [
   {
     id: 0, type: "origin",
     name: "Pune", subtitle: "Maharashtra, India",
-    lat: 18.5204, lng: 73.8567, emoji: "ð ",
+    lat: 18.5204, lng: 73.8567, emoji: "&#x1F3E0;",
     heroGradient: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
     summary: "Starting point of the journey. Flew from Pune International Airport to Cincinnati, KY to begin the US private preview customer tour.",
     wentWell: [], gaps: [], suggestions: []
@@ -773,48 +773,54 @@ const stops = [
   {
     id: 1, type: "customer", stopNum: 1,
     name: "Boone County", subtitle: "Florence / Burlington", state: "Kentucky",
-    lat: 38.978, lng: -84.719, emoji: "ðï¸",
+    lat: 38.978, lng: -84.719, emoji: "&#x1F3DB;",
     heroGradient: "linear-gradient(135deg, #1e1b4b 0%, #4B3FFF 100%)",
-    summary: "[ Describe the Boone County visit â who you met, the context of the meeting, and overall impression. What is their setup, team size, and current usage of the product? ]",
+    summary: "Met with the Boone County finance team for a private preview of the new Financials capabilities. Their biggest long-standing pain point has been the inability to configure their state-recommended Chart of Accounts, which forced workarounds, created reporting inefficiencies, and made day-to-day operations harder than they should be. The preview addressed this directly and generated strong positive momentum. They engaged in detail across COA, account security, journal entries, continuous close, and allocation &mdash; providing clear, specific feedback throughout. Overall sentiment was confident and aligned with the direction of the product.",
     wentWell: [
-      "[ Add what went well â e.g., 'Product demo resonated strongly with the finance team' ]",
-      "[ Add another highlight from this visit ]",
-      "[ Add a third highlight if applicable ]"
+      "New COA capabilities met and exceeded their expectations &mdash; they were able to configure their state-recommended structure exactly as required, eliminating prior workarounds entirely. This was the most impactful moment of the visit and a key reason cited for moving forward.",
+      "Account security and valid code combination controls strongly resonated &mdash; they have an ongoing issue with departments miscoding transactions leading to budget inaccuracies and correction overhead, and these features are seen as a direct, practical solution.",
+      "Journal entry experience was well received by the accounting team &mdash; particularly description-based account code search and undo functionality, which reduce effort and improve accuracy during data entry.",
+      "Continuous close capability was strongly appreciated &mdash; it directly removes year-end closure pressure, reduces reliance on manual journal entries during close, and keeps financials in a near real-time state. Seen as a meaningful operational shift.",
+      "Fiscal calendar configuration aligned with their expectations without concerns. Overall they left the session engaged and confident in the product direction."
     ],
     gaps: [
-      "[ Add a gap or pain point identified â e.g., 'Reporting workflow lacks bulk export capability' ]",
-      "[ Add another gap ]"
+      "Attribute hyperlinking to subledgers is incomplete &mdash; only a limited number of attributes are currently clickable. They expect all attributes within a journal entry to link directly to the corresponding subledger record for a frictionless GL-to-subledger experience.",
+      "Attachments are not directly accessible from within journal entries &mdash; users must navigate to the subledger to view them. This creates friction for audit readiness and review workflows; invoice documents should be visible directly on the journal entry screen.",
+      "Allocation engine is limited to fixed percentages, which does not meet their needs. They require balance-driven allocation methods including average balance over a period and point-in-time balance as of a specific date.",
+      "All existing financial reports must be available in the new system &mdash; they rely heavily on current reports and expect full continuity with equal or better capability, not replacements."
     ],
     suggestions: [
-      "[ Add a suggestion or feature request â e.g., 'Customer requested a dashboard view for department heads' ]",
-      "[ Add another suggestion ]"
+      "Make all attributes within journal entries clickable, with each linking directly to its corresponding subledger record &mdash; a connected experience that eliminates friction when moving between GL and subledgers.",
+      "Surface attachments directly within the journal entry screen so invoice documents and supporting files are accessible without navigating away to the subledger.",
+      "Ensure all attachments are fully migrated and remain correctly linked during the upgrade &mdash; this is a firm requirement alongside continuity of budgeting data and historical audit trails.",
+      "Expand the allocation engine to support configurable, balance-driven allocation rules &mdash; including average balance-based and point-in-time balance methods &mdash; in addition to fixed percentages, with flexibility to define additional balance-driven drivers."
     ]
   },
   {
     id: 2, type: "customer", stopNum: 2,
     name: "Tuscaloosa", subtitle: "Birmingham / Tuscaloosa", state: "Alabama",
-    lat: 33.2098, lng: -87.5692, emoji: "ðï¸",
+    lat: 33.2098, lng: -87.5692, emoji: "&#x1F3D9;",
     heroGradient: "linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)",
-    summary: "[ Describe the Tuscaloosa visit â who you met, key conversation themes, and overall sentiment. What stage of adoption are they at, and what are their top priorities? ]",
+    summary: "[ Describe the Tuscaloosa visit &mdash; who you met, key conversation themes, and overall sentiment. What stage of adoption are they at, and what are their top priorities? ]",
     wentWell: [
-      "[ Add what went well â e.g., 'Stakeholders were enthusiastic about the new budgeting module' ]",
+      "[ Add what went well &mdash; e.g., 'Stakeholders were enthusiastic about the new budgeting module' ]",
       "[ Add another highlight ]"
     ],
     gaps: [
-      "[ Add a gap â e.g., 'Integration with legacy system was a recurring concern' ]",
+      "[ Add a gap &mdash; e.g., 'Integration with legacy system was a recurring concern' ]",
       "[ Add another gap ]"
     ],
     suggestions: [
-      "[ Add a suggestion â e.g., 'Requested a training sandbox environment for new staff' ]",
+      "[ Add a suggestion &mdash; e.g., 'Requested a training sandbox environment for new staff' ]",
       "[ Add another suggestion ]"
     ]
   },
   {
     id: 3, type: "customer", stopNum: 3,
     name: "Liberty City", subtitle: "Liberty", state: "Missouri",
-    lat: 39.246, lng: -94.419, emoji: "ðï¸",
+    lat: 39.246, lng: -94.419, emoji: "&#x1F3DB;",
     heroGradient: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
-    summary: "[ Describe the Liberty City, Missouri visit â context, stakeholders, and overall tone. Are they an existing customer, prospect, or renewal? ]",
+    summary: "[ Describe the Liberty City, Missouri visit &mdash; context, stakeholders, and overall tone. Are they an existing customer, prospect, or renewal? ]",
     wentWell: [
       "[ Add what went well ]",
       "[ Add another highlight ]"
@@ -831,9 +837,9 @@ const stops = [
   {
     id: 4, type: "customer", stopNum: 4,
     name: "Parker County District Hospital", subtitle: "Weatherford", state: "Texas",
-    lat: 32.758, lng: -97.797, emoji: "ð¥",
+    lat: 32.758, lng: -97.797, emoji: "&#x1F3E5;",
     heroGradient: "linear-gradient(135deg, #431407 0%, #c2410c 100%)",
-    summary: "[ Describe the Parker County District Hospital visit â context, key stakeholders (IT, finance, admin?), and overall discussion themes. ]",
+    summary: "[ Describe the Parker County District Hospital visit &mdash; context, key stakeholders (IT, finance, admin?), and overall discussion themes. ]",
     wentWell: [
       "[ Add what went well ]",
       "[ Add another highlight ]"
@@ -850,9 +856,9 @@ const stops = [
   {
     id: 5, type: "customer", stopNum: 5,
     name: "Town of Northlake", subtitle: "Northlake (DFW)", state: "Texas",
-    lat: 33.075, lng: -97.284, emoji: "ðï¸",
+    lat: 33.075, lng: -97.284, emoji: "&#x1F3D8;",
     heroGradient: "linear-gradient(135deg, #312e81 0%, #7c3aed 100%)",
-    summary: "[ Describe the Town of Northlake visit â who you met, scale of the municipality, current product usage, and key themes from the discussion. ]",
+    summary: "[ Describe the Town of Northlake visit &mdash; who you met, scale of the municipality, current product usage, and key themes from the discussion. ]",
     wentWell: [ "[ Add what went well ]", "[ Add another highlight ]" ],
     gaps: [ "[ Add a gap identified ]" ],
     suggestions: [ "[ Add a suggestion from Northlake ]" ]
@@ -860,18 +866,18 @@ const stops = [
   {
     id: 6, type: "customer", stopNum: 6,
     name: "City of Grapevine", subtitle: "Grapevine (DFW)", state: "Texas",
-    lat: 32.934, lng: -97.078, emoji: "ð",
+    lat: 32.934, lng: -97.078, emoji: "&#x1F347;",
     heroGradient: "linear-gradient(135deg, #3b0764 0%, #7e22ce 100%)",
-    summary: "[ Describe the Grapevine visit â context, key stakeholders, product usage maturity, and overall impression. ]",
+    summary: "[ Describe the Grapevine visit &mdash; context, key stakeholders, product usage maturity, and overall impression. ]",
     wentWell: [ "[ Add what went well ]", "[ Add another highlight ]" ],
     gaps: [ "[ Add a gap identified ]" ],
     suggestions: [ "[ Add a suggestion from Grapevine ]" ]
   }
 ];
 
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  MAP EXPAND TOGGLE
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 let mapExpanded = false;
 
 function toggleMap() {
@@ -889,9 +895,9 @@ function toggleMap() {
   }, 390);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  MAP
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 const map = L.map('map', {
   center: [28, 10], zoom: 3,
   zoomControl: false, attributionControl: false
@@ -899,18 +905,18 @@ const map = L.map('map', {
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd', maxZoom: 18
 }).addTo(map);
-L.control.attribution({ position: 'bottomright', prefix: 'Â© OpenStreetMap Â· CARTO' }).addTo(map);
+L.control.attribution({ position: 'bottomright', prefix: '&copy; OpenStreetMap &middot; CARTO' }).addTo(map);
 
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  ROUTE LINE
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 let routeLayer = null;
 
 function updateRouteLine(toId) {
   // Remove old line
   if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
 
-  // Build ordered path: origin (0) â all customer stops up to toId
+  // Build ordered path: origin (0) &rarr; all customer stops up to toId
   const path = [];
   for (let i = 0; i <= toId; i++) {
     if (stops[i]) path.push([stops[i].lat, stops[i].lng]);
@@ -935,7 +941,7 @@ stops.forEach(stop => {
   const bg     = isOrigin ? '#ecfdf5' : '#ede9ff';
   const border = isOrigin ? '#17b26a' : '#4B3FFF';
   const txt    = isOrigin ? '#17b26a' : '#4B3FFF';
-  const label  = isOrigin ? 'ð ' : stop.stopNum;
+  const label  = isOrigin ? '&#x1F3E0;' : stop.stopNum;
   const size   = 32;
 
   const icon = L.divIcon({
@@ -962,9 +968,9 @@ map.fitBounds(L.latLngBounds(allLL).pad(0.08));
 
 setTimeout(() => { map.invalidateSize(); map.fitBounds(L.latLngBounds(allLL).pad(0.08)); }, 120);
 
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  STOP NAV PILLS
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 function buildStopNav() {
   const nav = document.getElementById('stop-nav');
   nav.innerHTML = stops.map(s => {
@@ -977,9 +983,9 @@ function buildStopNav() {
 }
 buildStopNav();
 
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  HELPERS
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 const isPh = s => (typeof s === 'string' ? s : s.text).trim().startsWith('[');
 const itemText = s => typeof s === 'string' ? s : s.text;
 const itemStatus = s => (typeof s === 'object' && s.status) ? s.status : 'Noted';
@@ -1001,33 +1007,33 @@ stops.forEach(stop => {
   })).filter(t => t.text);
 });
 
-// ââ EDIT MODE STATE ââ
+// -- EDIT MODE STATE --
 let editMode = false;
 let currentStopId = null;
 
 
 function countReal(arr) {
   const n = (arr || []).filter(x => !isPh(x)).length;
-  return n > 0 ? n : 'â';
+  return n > 0 ? n : '&mdash;';
 }
 
-// ââ VIEW MODE: render items ââ
+// -- VIEW MODE: render items --
 function buildItems(arr, dotColor, hasStatus) {
   if (!arr || arr.length === 0)
-    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">â</span><span>Nothing recorded yet.</span></div>`;
+    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">&mdash;</span><span>Nothing recorded yet.</span></div>`;
   return arr.map(item => {
     const text = itemText(item);
     const status = hasStatus ? itemStatus(item) : null;
     const badge = (status && !isPh(item))
       ? `<span class="status-badge ${status.toLowerCase()}">${status}</span>` : '';
     return `<div class="insight-item ${isPh(item) ? '' : 'filled'}">
-       <span class="item-dot" style="color:${dotColor}">â¢</span>
+       <span class="item-dot" style="color:${dotColor}">&bull;</span>
        <span>${text}${badge}</span>
      </div>`;
   }).join('');
 }
 
-// ââ EDIT MODE: render items ââ
+// -- EDIT MODE: render items --
 function buildItemsEdit(arr, containerId, hasStatus) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -1066,7 +1072,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
 
     const del = document.createElement('button');
     del.className = 'edit-delete-btn';
-    del.innerHTML = 'Ã';
+    del.innerHTML = '&times;';
     del.title = 'Remove this item';
     del.addEventListener('click', () => { row.remove(); });
     row.appendChild(del);
@@ -1085,7 +1091,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
     newInput.className = 'edit-item-input';
     newInput.rows = 2;
     newInput.dataset.field = containerId;
-    newInput.placeholder = 'Enter textâ¦';
+    newInput.placeholder = 'Enter text&hellip;';
     newRow.appendChild(newInput);
     if (hasStatus) {
       const sel = document.createElement('select');
@@ -1100,7 +1106,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
       newRow.appendChild(sel);
     }
     const del2 = document.createElement('button');
-    del2.className = 'edit-delete-btn'; del2.innerHTML = 'Ã';
+    del2.className = 'edit-delete-btn'; del2.innerHTML = '&times;';
     del2.addEventListener('click', () => newRow.remove());
     newRow.appendChild(del2);
     container.insertBefore(newRow, addBtn);
@@ -1109,7 +1115,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
   container.appendChild(addBtn);
 }
 
-// ââ COLLECT EDITS FROM DOM â save to stops array ââ
+// -- COLLECT EDITS FROM DOM &rarr; save to stops array --
 function saveCurrentEdits() {
   if (!editMode || currentStopId === null) return;
   const stop = stops[currentStopId];
@@ -1144,9 +1150,9 @@ function saveCurrentEdits() {
   saveTaskEdits();
 }
 
-// ââ RENDER CURRENT STOP IN EDIT MODE ââ
+// -- RENDER CURRENT STOP IN EDIT MODE --
 function renderEditMode(stop) {
-  // Summary â textarea
+  // Summary &rarr; textarea
   const summaryBlock = document.querySelector('.summary-block');
   const existingP = document.getElementById('summary-text');
   if (existingP) existingP.style.display = 'none';
@@ -1165,14 +1171,14 @@ function renderEditMode(stop) {
   buildItemsEdit(stop.gaps,        'items-gaps',        true);
   buildItemsEdit(stop.suggestions, 'items-suggestions', true);
 
-  // Update counts live â not critical in edit mode, just clear them
-  document.getElementById('count-well').textContent        = 'â';
-  document.getElementById('count-gaps').textContent        = 'â';
-  document.getElementById('count-suggestions').textContent = 'â';
+  // Update counts live &mdash; not critical in edit mode, just clear them
+  document.getElementById('count-well').textContent        = '&#x270E;';
+  document.getElementById('count-gaps').textContent        = '&#x270E;';
+  document.getElementById('count-suggestions').textContent = '&#x270E;';
   renderTasksEdit(stop);
 }
 
-// ââ RENDER CURRENT STOP IN VIEW MODE ââ
+// -- RENDER CURRENT STOP IN VIEW MODE --
 function renderViewMode(stop) {
   // Restore summary text
   const existingP = document.getElementById('summary-text');
@@ -1193,7 +1199,7 @@ function renderViewMode(stop) {
   renderTasksView(stop);
 }
 
-// ââ PASSWORD / LOCK LOGIC ââ
+// -- PASSWORD / LOCK LOGIC --
 function openManageFeedback() {
   if (editMode) { lockEditing(); return; }
   if (currentStopId === null) {
@@ -1228,7 +1234,7 @@ function checkPassword() {
 
 function enableEditing() {
   editMode = true;
-  document.getElementById('manage-btn').textContent  = 'â Done Editing';
+  document.getElementById('manage-btn').textContent  = '&#x2713; Done Editing';
   document.getElementById('manage-btn').classList.add('active');
   document.getElementById('edit-banner').classList.add('visible');
   if (currentStopId !== null) renderEditMode(stops[currentStopId]);
@@ -1237,15 +1243,15 @@ function enableEditing() {
 function lockEditing() {
   saveCurrentEdits();
   editMode = false;
-  document.getElementById('manage-btn').textContent = 'â Manage Feedback';
+  document.getElementById('manage-btn').textContent = '&#x270E; Manage Feedback';
   document.getElementById('manage-btn').classList.remove('active');
   document.getElementById('edit-banner').classList.remove('visible');
   if (currentStopId !== null) renderViewMode(stops[currentStopId]);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââ
-//  TASKS â VIEW MODE
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
+//  TASKS &mdash; VIEW MODE
+// -----------------------------------------
 function renderTasksView(stop) {
   const container = document.getElementById('tasks-view');
   const countEl   = document.getElementById('tasks-count');
@@ -1256,12 +1262,12 @@ function renderTasksView(stop) {
 
   if (tasks.length === 0) {
     container.innerHTML = `<div class="tasks-empty">No tasks yet. Click Manage Feedback to add tasks for this stop.</div>`;
-    if (countEl) countEl.textContent = 'â';
+    if (countEl) countEl.textContent = '&mdash;';
     return;
   }
 
   const openCount = tasks.filter(t => t.status !== 'done').length;
-  if (countEl) countEl.textContent = openCount > 0 ? openCount : 'â';
+  if (countEl) countEl.textContent = openCount > 0 ? openCount : '&#x2713;';
 
   let html = '';
   tasks.forEach(task => {
@@ -1271,10 +1277,10 @@ function renderTasksView(stop) {
       const d = new Date(task.dueDate + 'T00:00:00');
       const fmt = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       const isOverdue = !done && d < today;
-      duePill = `<span class="task-due-tag${isOverdue ? ' overdue' : ''}">${isOverdue ? 'â  ' : ''}${fmt}</span>`;
+      duePill = `<span class="task-due-tag${isOverdue ? ' overdue' : ''}">${isOverdue ? '&#x26A0; ' : ''}${fmt}</span>`;
     }
     html += `<div class="task-item ${done ? 'done' : ''}">
-      <div class="task-checkbox">${done ? 'â' : ''}</div>
+      <div class="task-checkbox">${done ? '&#x2713;' : ''}</div>
       <span class="task-text">${task.text}</span>
       ${duePill}
     </div>`;
@@ -1282,14 +1288,14 @@ function renderTasksView(stop) {
   container.innerHTML = html;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââ
-//  TASKS â EDIT MODE
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
+//  TASKS &mdash; EDIT MODE
+// -----------------------------------------
 function renderTasksEdit(stop) {
   const container = document.getElementById('tasks-view');
   const countEl   = document.getElementById('tasks-count');
   if (!container) return;
-  if (countEl) countEl.textContent = 'â';
+  if (countEl) countEl.textContent = '&#x270E;';
 
   const tasks = stop.tasks || [];
   container.innerHTML = '';
@@ -1298,18 +1304,18 @@ function renderTasksEdit(stop) {
     const row = document.createElement('div');
     row.className = 'task-edit-row';
 
-    // Status toggle: todo â done
+    // Status toggle: todo &harr; done
     const statusBtn = document.createElement('button');
     const status0 = task ? task.status : 'todo';
     statusBtn.dataset.status = status0;
     statusBtn.className = 'task-status-toggle ' + status0;
-    statusBtn.textContent = status0 === 'done' ? 'â' : '';
+    statusBtn.textContent = status0 === 'done' ? '&#x2713;' : '';
     statusBtn.title = 'Toggle done';
     statusBtn.addEventListener('click', () => {
       const next = statusBtn.dataset.status === 'done' ? 'todo' : 'done';
       statusBtn.dataset.status = next;
       statusBtn.className = 'task-status-toggle ' + next;
-      statusBtn.textContent = next === 'done' ? 'â' : '';
+      statusBtn.textContent = next === 'done' ? '&#x2713;' : '';
       textInput.className = 'task-edit-text' + (next === 'done' ? ' done-text' : '');
     });
     row.appendChild(statusBtn);
@@ -1317,7 +1323,7 @@ function renderTasksEdit(stop) {
     const textInput = document.createElement('input');
     textInput.className = 'task-edit-text' + (status0 === 'done' ? ' done-text' : '');
     textInput.value = task ? task.text : '';
-    textInput.placeholder = 'Task descriptionâ¦';
+    textInput.placeholder = 'Task description&hellip;';
     row.appendChild(textInput);
 
     const dueDateInput = document.createElement('input');
@@ -1329,7 +1335,7 @@ function renderTasksEdit(stop) {
 
     const delBtn = document.createElement('button');
     delBtn.className = 'edit-delete-btn';
-    delBtn.innerHTML = 'Ã';
+    delBtn.innerHTML = '&times;';
     delBtn.title = 'Remove task';
     delBtn.addEventListener('click', () => row.remove());
     row.appendChild(delBtn);
@@ -1354,7 +1360,7 @@ function renderTasksEdit(stop) {
 
     const textInput = document.createElement('input');
     textInput.className = 'task-add-input';
-    textInput.placeholder = 'Task descriptionâ¦';
+    textInput.placeholder = 'Task description&hellip;';
     row.appendChild(textInput);
 
     const dateInput = document.createElement('input');
@@ -1407,9 +1413,9 @@ function renderTasksEdit(stop) {
   container.appendChild(addTaskBtn);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââ
-//  TASKS â SAVE EDITS
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
+//  TASKS &mdash; SAVE EDITS
+// -----------------------------------------
 function saveTaskEdits() {
   if (currentStopId === null) return;
   const stop = stops[currentStopId];
@@ -1430,9 +1436,9 @@ function saveTaskEdits() {
   stop.tasks = tasks;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 //  SELECT STOP
-// âââââââââââââââââââââââââââââââââââââââââ
+// -----------------------------------------
 function selectStop(id) {
   // Auto-save any edits from the previous stop before switching
   if (editMode && currentStopId !== null && currentStopId !== id) {
@@ -1445,7 +1451,7 @@ function selectStop(id) {
 
   // Header pill
   document.getElementById('hdr-pill').textContent =
-    stop.type === 'customer' ? `Stop ${stop.stopNum} of 6` : 'â';
+    stop.type === 'customer' ? `Stop ${stop.stopNum} of 6` : '&mdash;';
 
   // Activate nav pill
   document.querySelectorAll('.stop-pill').forEach(p => p.classList.remove('active'));
@@ -1500,8 +1506,8 @@ function selectStop(id) {
   const nextBtn = document.getElementById('btn-next');
   prevBtn.disabled = !prev;
   nextBtn.disabled = !next;
-  prevBtn.innerHTML = prev ? `â ${prev.name}` : 'â Previous';
-  nextBtn.innerHTML = next ? `${next.name} â` : 'Next â';
+  prevBtn.innerHTML = prev ? `&larr; ${prev.name}` : '&larr; Previous';
+  nextBtn.innerHTML = next ? `${next.name} &rarr;` : 'Next &rarr;';
 
   // Sync floating side buttons
   const sidePrev = document.getElementById('side-prev');
@@ -1515,7 +1521,7 @@ function selectStop(id) {
   // Draw dotted route from origin to current stop
   updateRouteLine(id);
 
-  // ââ DFW cluster (stops 4-5-6): zoom into DFW so route lines are visible ââ
+  // -- DFW cluster (stops 4-5-6): zoom into DFW so route lines are visible --
   const DFW_CLUSTER = [4, 5, 6];
   const inCluster   = DFW_CLUSTER.includes(id);
 
