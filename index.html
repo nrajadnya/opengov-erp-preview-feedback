@@ -214,16 +214,17 @@
     .hero-loc { font-size: 12.5px; color: rgba(255,255,255,0.65); margin-top: 4px; }
 
     /* Insight body */
-    .insight-body { padding: 24px 28px 32px; }
+    .insight-body { padding: 28px 32px 40px; }
 
     /* Summary section */
     .summary-block {
       background: #fff; border: 1px solid var(--border);
-      border-radius: 12px; padding: 20px 22px; margin-bottom: 20px;
+      border-radius: 14px; padding: 22px 26px 24px; margin-bottom: 22px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
     .section-heading {
       font-size: 10px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.4px; margin-bottom: 10px;
+      letter-spacing: 1.4px; margin-bottom: 12px;
     }
     .sh-summary    { color: var(--og-purple); }
     .sh-well       { color: var(--og-green); }
@@ -231,32 +232,37 @@
     .sh-suggestion { color: var(--og-orange); }
 
     .summary-text {
-      font-size: 14px; line-height: 1.8; color: var(--text-sub);
-      font-style: italic;
+      font-size: 14.5px; line-height: 1.85; color: var(--text-sub);
+      font-style: italic; min-height: 48px;
     }
     .summary-text.filled { font-style: normal; color: var(--text-main); }
+    .summary-text p, .summary-text ul, .summary-text ol { margin: 0 0 8px; }
+    .summary-text ul, .summary-text ol { padding-left: 20px; }
+    .summary-text p:last-child, .summary-text ul:last-child, .summary-text ol:last-child { margin-bottom: 0; }
 
     /* Three-column insight grid */
     .insights-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 18px;
       margin-bottom: 24px;
     }
-    @media (max-width: 900px) { .insights-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 960px) { .insights-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px) { .insights-grid { grid-template-columns: 1fr; } }
 
     .insight-col {
       background: #fff; border: 1px solid var(--border);
-      border-radius: 12px; padding: 18px 18px 14px;
+      border-radius: 14px; padding: 20px 20px 16px;
       display: flex; flex-direction: column;
       border-top-width: 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
     .insight-col.col-well       { border-top-color: var(--og-green); }
     .insight-col.col-gap        { border-top-color: var(--og-amber); }
     .insight-col.col-suggestion { border-top-color: var(--og-orange); }
     .col-header {
       display: flex; align-items: center; gap: 8px;
-      margin-bottom: 14px; padding-bottom: 10px;
+      margin-bottom: 16px; padding-bottom: 12px;
       border-bottom: 1px solid var(--border-soft);
     }
 
@@ -273,14 +279,18 @@
     .cc-suggestion { color: var(--og-orange); }
 
     .insight-item {
-      display: flex; gap: 9px; align-items: flex-start;
-      padding: 9px 0; border-bottom: 1px solid var(--border-soft);
-      font-size: 13px; line-height: 1.55; color: var(--text-sub);
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 12px 0; border-bottom: 1px solid var(--border-soft);
+      font-size: 13.5px; line-height: 1.7; color: var(--text-sub);
       font-style: italic;
     }
     .insight-item:last-child { border-bottom: none; padding-bottom: 0; }
     .insight-item.filled { font-style: normal; color: var(--text-main); }
-    .item-dot { flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+    .insight-item .item-content { flex: 1; }
+    .insight-item .item-content p, .insight-item .item-content ul, .insight-item .item-content ol { margin: 0 0 4px; }
+    .insight-item .item-content ul, .insight-item .item-content ol { padding-left: 18px; }
+    .insight-item .item-content p:last-child, .insight-item .item-content ul:last-child, .insight-item .item-content ol:last-child { margin-bottom: 0; }
+    .item-dot { flex-shrink: 0; font-size: 13px; margin-top: 3px; }
 
     /* Floating side nav buttons */
     .side-nav-btn {
@@ -378,30 +388,73 @@
     }
     .edit-save-btn:hover { background: var(--og-purple-dark); }
 
-    /* -- EDIT MODE FIELDS -- */
-    .edit-summary-textarea {
-      width: 100%; min-height: 72px;
-      border: 1.5px solid var(--og-purple-light); border-radius: 8px;
-      padding: 10px 12px; font-size: 14px; line-height: 1.75;
-      font-family: 'DM Sans', sans-serif; color: var(--text-main);
-      resize: vertical; outline: none; box-sizing: border-box;
-      transition: border-color 0.15s; background: #faf9ff;
+    /* -- RICH TEXT TOOLBAR -- */
+    .rt-toolbar {
+      display: flex; align-items: center; gap: 2px; flex-wrap: wrap;
+      padding: 6px 10px; background: #fff;
+      border: 1.5px solid var(--og-purple-light); border-radius: 10px 10px 0 0;
+      border-bottom: none;
     }
-    .edit-summary-textarea:focus { border-color: var(--og-purple); background: #fff; }
+    .rt-toolbar.hidden { display: none; }
+    .rt-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 30px; height: 28px; padding: 0 6px;
+      border: 1.5px solid transparent; border-radius: 6px;
+      background: none; cursor: pointer; font-size: 13px; font-weight: 700;
+      color: var(--text-sub); font-family: 'DM Sans', sans-serif;
+      transition: all 0.12s; user-select: none; -webkit-user-select: none;
+    }
+    .rt-btn:hover { background: var(--og-purple-light); color: var(--og-purple); border-color: var(--og-purple-light); }
+    .rt-btn.active { background: var(--og-purple-light); color: var(--og-purple); border-color: #c7c0ff; }
+    .rt-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+
+    /* -- EDIT MODE FIELDS -- */
+    .edit-rt-editor {
+      width: 100%; min-height: 120px;
+      border: 1.5px solid var(--og-purple-light); border-radius: 0 0 8px 8px;
+      padding: 12px 14px; font-size: 14.5px; line-height: 1.85;
+      font-family: 'DM Sans', sans-serif; color: var(--text-main);
+      outline: none; box-sizing: border-box;
+      background: #faf9ff; overflow-y: auto;
+    }
+    .edit-rt-editor:focus { border-color: var(--og-purple); background: #fff; }
+    .edit-rt-editor p, .edit-rt-editor ul, .edit-rt-editor ol { margin: 0 0 6px; }
+    .edit-rt-editor ul, .edit-rt-editor ol { padding-left: 20px; }
+    .edit-rt-editor p:last-child, .edit-rt-editor ul:last-child, .edit-rt-editor ol:last-child { margin-bottom: 0; }
 
     .edit-item-row {
-      display: flex; align-items: flex-start; gap: 6px;
-      padding: 5px 0; border-bottom: 1px solid var(--border-soft);
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 0; border-bottom: 1px solid var(--border-soft);
     }
     .edit-item-row:last-of-type { border-bottom: none; }
     .edit-item-input {
-      flex: 1; border: 1.5px solid var(--border); border-radius: 7px;
-      padding: 7px 10px; font-size: 13px; line-height: 1.5;
+      flex: 1; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 10px 12px; font-size: 13.5px; line-height: 1.7;
       font-family: 'DM Sans', sans-serif; color: var(--text-main);
-      outline: none; resize: none; min-height: 34px;
+      outline: none; min-height: 52px;
       transition: border-color 0.15s; background: #fff;
     }
-    .edit-item-input:focus { border-color: var(--og-purple); }
+    .edit-item-input:focus { border-color: var(--og-purple); border-radius: 0 0 8px 8px; }
+    .edit-item-input p, .edit-item-input ul, .edit-item-input ol { margin: 0 0 4px; }
+    .edit-item-input ul, .edit-item-input ol { padding-left: 18px; }
+    .edit-item-input p:last-child, .edit-item-input ul:last-child, .edit-item-input ol:last-child { margin-bottom: 0; }
+    .edit-item-wrap { flex: 1; display: flex; flex-direction: column; }
+    .edit-item-mini-toolbar {
+      display: flex; align-items: center; gap: 1px;
+      padding: 4px 8px; background: #f8f7ff;
+      border: 1.5px solid var(--border); border-bottom: none;
+      border-radius: 8px 8px 0 0;
+    }
+    .rt-mini-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 24px; height: 22px; padding: 0 4px;
+      border: none; border-radius: 4px;
+      background: none; cursor: pointer; font-size: 11px; font-weight: 700;
+      color: var(--text-sub); font-family: 'DM Sans', sans-serif;
+      transition: all 0.1s; user-select: none; -webkit-user-select: none;
+    }
+    .rt-mini-btn:hover { background: var(--og-purple-light); color: var(--og-purple); }
+    .rt-mini-sep { width: 1px; height: 14px; background: var(--border); margin: 0 2px; }
     .edit-item-select {
       flex-shrink: 0; width: 108px;
       border: 1.5px solid var(--border); border-radius: 7px;
@@ -698,7 +751,18 @@
         <!-- Summary -->
         <div class="summary-block">
           <div class="section-heading sh-summary">Visit Summary</div>
-          <p class="summary-text" id="summary-text">—</p>
+          <!-- Rich text toolbar — shown only in edit mode -->
+          <div class="rt-toolbar hidden" id="summary-rt-toolbar">
+            <button class="rt-btn" onmousedown="event.preventDefault();rtCmd('bold')" title="Bold"><b>B</b></button>
+            <button class="rt-btn" onmousedown="event.preventDefault();rtCmd('italic')" title="Italic"><i>I</i></button>
+            <button class="rt-btn" onmousedown="event.preventDefault();rtCmd('underline')" title="Underline"><u>U</u></button>
+            <div class="rt-sep"></div>
+            <button class="rt-btn" onmousedown="event.preventDefault();rtCmd('insertUnorderedList')" title="Bullet list">&#8226; List</button>
+            <button class="rt-btn" onmousedown="event.preventDefault();rtCmd('insertOrderedList')" title="Numbered list">1. List</button>
+            <div class="rt-sep"></div>
+            <button class="rt-btn" onmousedown="event.preventDefault();rtCmd('removeFormat')" title="Clear formatting" style="font-size:11px">Clear</button>
+          </div>
+          <div class="summary-text" id="summary-text">—</div>
         </div>
 
         <!-- 3-col grid -->
@@ -980,8 +1044,16 @@ buildStopNav();
 // -----------------------------------------
 //  HELPERS
 // -----------------------------------------
-const isPh = s => (typeof s === 'string' ? s : s.text).trim().startsWith('[');
+// Rich text command dispatcher
+function rtCmd(cmd) {
+  const target = window._rtTarget;
+  if (target) target.focus();
+  document.execCommand(cmd, false, null);
+}
+
+const isPh = s => itemPlain(s).startsWith('[');
 const itemText = s => typeof s === 'string' ? s : s.text;
+const itemPlain = s => itemText(s).replace(/<[^>]+>/g,'').trim();
 const itemStatus = s => (typeof s === 'object' && s.status) ? s.status : 'Noted';
 
 // Normalize gaps/suggestions to {text, status} objects once at startup
@@ -1014,7 +1086,7 @@ function countReal(arr) {
 // -- VIEW MODE: render items --
 function buildItems(arr, dotColor, hasStatus) {
   if (!arr || arr.length === 0)
-    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">—</span><span>Nothing recorded yet.</span></div>`;
+    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">—</span><span class="item-content">Nothing recorded yet.</span></div>`;
   return arr.map(item => {
     const text = itemText(item);
     const status = hasStatus ? itemStatus(item) : null;
@@ -1022,89 +1094,97 @@ function buildItems(arr, dotColor, hasStatus) {
       ? `<span class="status-badge ${status.toLowerCase()}">${status}</span>` : '';
     return `<div class="insight-item ${isPh(item) ? '' : 'filled'}">
        <span class="item-dot" style="color:${dotColor}">•</span>
-       <span>${text}${badge}</span>
+       <div class="item-content">${text}${badge}</div>
      </div>`;
   }).join('');
 }
 
 // -- EDIT MODE: render items --
+function makeMiniToolbar(editor) {
+  const bar = document.createElement('div');
+  bar.className = 'edit-item-mini-toolbar';
+  const btns = [
+    ['<b>B</b>','bold','Bold'],
+    ['<i>I</i>','italic','Italic'],
+    ['<u>U</u>','underline','Underline'],
+    [null, null, null], // sep
+    ['&bull;','insertUnorderedList','Bullet list'],
+    ['1.','insertOrderedList','Numbered list'],
+    [null, null, null], // sep
+    ['&#10005;','removeFormat','Clear']
+  ];
+  btns.forEach(([label, cmd, title]) => {
+    if (!label) { const s = document.createElement('div'); s.className='rt-mini-sep'; bar.appendChild(s); return; }
+    const b = document.createElement('button');
+    b.className = 'rt-mini-btn'; b.innerHTML = label; b.title = title;
+    b.addEventListener('mousedown', e => {
+      e.preventDefault();
+      editor.focus();
+      document.execCommand(cmd, false, null);
+    });
+    bar.appendChild(b);
+  });
+  return bar;
+}
+
+function makeItemRow(text, status, containerId, hasStatus, addBtn, container) {
+  const row = document.createElement('div');
+  row.className = 'edit-item-row';
+  const wrap = document.createElement('div');
+  wrap.className = 'edit-item-wrap';
+  const miniBar = makeMiniToolbar(null); // placeholder, will fix ref below
+  wrap.appendChild(miniBar);
+  const div = document.createElement('div');
+  div.className = 'edit-item-input';
+  div.contentEditable = 'true';
+  div.dataset.field = containerId;
+  // Re-attach minibar with correct ref
+  miniBar.querySelectorAll('.rt-mini-btn').forEach(b => {
+    b.addEventListener('mousedown', e => { e.preventDefault(); div.focus(); });
+  });
+  if (text) div.innerHTML = text; else div.setAttribute('data-empty', '1');
+  if (!text) div.setAttribute('placeholder', 'Enter text…');
+  wrap.appendChild(div);
+  row.appendChild(wrap);
+
+  if (hasStatus) {
+    const sel = document.createElement('select');
+    sel.className = 'edit-item-select' + (status === 'Prioritised' ? ' prioritised' : '');
+    sel.dataset.field = containerId;
+    ['Noted','Prioritised'].forEach(opt => {
+      const o = document.createElement('option'); o.value = opt; o.textContent = opt;
+      if (opt === status) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', function() {
+      this.className = 'edit-item-select' + (this.value === 'Prioritised' ? ' prioritised' : '');
+    });
+    row.appendChild(sel);
+  }
+  const del = document.createElement('button');
+  del.className = 'edit-delete-btn'; del.innerHTML = '×'; del.title = 'Remove this item';
+  del.addEventListener('click', () => row.remove());
+  row.appendChild(del);
+  return row;
+}
+
 function buildItemsEdit(arr, containerId, hasStatus) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = '';
-  (arr || []).forEach((item, idx) => {
+  (arr || []).forEach((item) => {
     const text = itemText(item);
     const status = hasStatus ? itemStatus(item) : 'Noted';
-    const row = document.createElement('div');
-    row.className = 'edit-item-row';
-    row.dataset.idx = idx;
-
-    const textarea = document.createElement('textarea');
-    textarea.className = 'edit-item-input';
-    textarea.value = text;
-    textarea.rows = 2;
-    textarea.dataset.field = containerId;
-    textarea.dataset.idx = idx;
-    row.appendChild(textarea);
-
-    if (hasStatus) {
-      const sel = document.createElement('select');
-      sel.className = 'edit-item-select' + (status === 'Prioritised' ? ' prioritised' : '');
-      sel.dataset.field = containerId;
-      sel.dataset.idx = idx;
-      ['Noted','Prioritised'].forEach(opt => {
-        const o = document.createElement('option');
-        o.value = opt; o.textContent = opt;
-        if (opt === status) o.selected = true;
-        sel.appendChild(o);
-      });
-      sel.addEventListener('change', function() {
-        this.className = 'edit-item-select' + (this.value === 'Prioritised' ? ' prioritised' : '');
-      });
-      row.appendChild(sel);
-    }
-
-    const del = document.createElement('button');
-    del.className = 'edit-delete-btn';
-    del.innerHTML = '×';
-    del.title = 'Remove this item';
-    del.addEventListener('click', () => { row.remove(); });
-    row.appendChild(del);
-
-    container.appendChild(row);
+    container.appendChild(makeItemRow(text, status, containerId, hasStatus, null, container));
   });
 
-  // Add item button
   const addBtn = document.createElement('button');
   addBtn.className = 'add-item-btn';
   addBtn.innerHTML = '+ Add item';
   addBtn.addEventListener('click', () => {
-    const newRow = document.createElement('div');
-    newRow.className = 'edit-item-row';
-    const newInput = document.createElement('textarea');
-    newInput.className = 'edit-item-input';
-    newInput.rows = 2;
-    newInput.dataset.field = containerId;
-    newInput.placeholder = 'Enter text…';
-    newRow.appendChild(newInput);
-    if (hasStatus) {
-      const sel = document.createElement('select');
-      sel.className = 'edit-item-select';
-      ['Noted','Prioritised'].forEach(opt => {
-        const o = document.createElement('option'); o.value = opt; o.textContent = opt;
-        sel.appendChild(o);
-      });
-      sel.addEventListener('change', function() {
-        this.className = 'edit-item-select' + (this.value === 'Prioritised' ? ' prioritised' : '');
-      });
-      newRow.appendChild(sel);
-    }
-    const del2 = document.createElement('button');
-    del2.className = 'edit-delete-btn'; del2.innerHTML = '×';
-    del2.addEventListener('click', () => newRow.remove());
-    newRow.appendChild(del2);
-    container.insertBefore(newRow, addBtn);
-    newInput.focus();
+    const row = makeItemRow('', 'Noted', containerId, hasStatus, addBtn, container);
+    container.insertBefore(row, addBtn);
+    row.querySelector('.edit-item-input').focus();
   });
   container.appendChild(addBtn);
 }
@@ -1114,9 +1194,9 @@ function saveCurrentEdits() {
   if (!editMode || currentStopId === null) return;
   const stop = stops[currentStopId];
 
-  // Summary
+  // Summary (contenteditable)
   const ta = document.getElementById('summary-edit-ta');
-  if (ta) stop.summary = ta.value;
+  if (ta) stop.summary = ta.innerHTML.trim();
 
   // Helper: collect rows from a container
   function collectRows(containerId, hasStatus) {
@@ -1127,12 +1207,13 @@ function saveCurrentEdits() {
     rows.forEach(row => {
       const input = row.querySelector('.edit-item-input');
       const sel   = row.querySelector('.edit-item-select');
-      const text  = input ? input.value.trim() : '';
-      if (!text) return; // skip empty rows
+      const html  = input ? input.innerHTML.trim() : '';
+      const plain = html.replace(/<[^>]+>/g,'').trim();
+      if (!plain) return; // skip empty rows
       if (hasStatus) {
-        result.push({ text, status: sel ? sel.value : 'Noted' });
+        result.push({ text: html, status: sel ? sel.value : 'Noted' });
       } else {
-        result.push(text);
+        result.push(html);
       }
     });
     return result;
@@ -1146,29 +1227,34 @@ function saveCurrentEdits() {
 
 // -- RENDER CURRENT STOP IN EDIT MODE --
 function renderEditMode(stop) {
-  // Summary → textarea
+  // Summary → contenteditable div
   const summaryBlock = document.querySelector('.summary-block');
   const existingP = document.getElementById('summary-text');
   if (existingP) existingP.style.display = 'none';
+  // Show toolbar
+  const toolbar = document.getElementById('summary-rt-toolbar');
+  if (toolbar) toolbar.classList.remove('hidden');
   let ta = document.getElementById('summary-edit-ta');
   if (!ta) {
-    ta = document.createElement('textarea');
+    ta = document.createElement('div');
     ta.id = 'summary-edit-ta';
-    ta.className = 'edit-summary-textarea';
+    ta.className = 'edit-rt-editor';
+    ta.contentEditable = 'true';
+    ta.addEventListener('focus', () => { window._rtTarget = ta; });
     summaryBlock.appendChild(ta);
   }
-  ta.value = stop.summary;
+  ta.innerHTML = stop.summary;
   ta.style.display = 'block';
+  window._rtTarget = ta;
 
   // Columns
   buildItemsEdit(stop.wentWell,    'items-well',        false);
   buildItemsEdit(stop.gaps,        'items-gaps',        true);
   buildItemsEdit(stop.suggestions, 'items-suggestions', true);
 
-  // Update counts live — not critical in edit mode, just clear them
-  document.getElementById('count-well').textContent        = '✎';
-  document.getElementById('count-gaps').textContent        = '✎';
-  document.getElementById('count-suggestions').textContent = '✎';
+  document.getElementById('count-well').textContent        = '&#x270E;';
+  document.getElementById('count-gaps').textContent        = '&#x270E;';
+  document.getElementById('count-suggestions').textContent = '&#x270E;';
   renderTasksEdit(stop);
 }
 
@@ -1178,9 +1264,12 @@ function renderViewMode(stop) {
   const existingP = document.getElementById('summary-text');
   const ta = document.getElementById('summary-edit-ta');
   if (ta) ta.style.display = 'none';
+  // Hide toolbar
+  const toolbar = document.getElementById('summary-rt-toolbar');
+  if (toolbar) toolbar.classList.add('hidden');
   if (existingP) {
     existingP.style.display = '';
-    existingP.textContent = stop.summary;
+    existingP.innerHTML = stop.summary;
     existingP.className = 'summary-text' + (isPh(stop.summary) ? '' : ' filled');
   }
 
