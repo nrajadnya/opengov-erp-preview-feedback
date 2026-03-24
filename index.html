@@ -15,7 +15,7 @@
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>India &rarr; US Customer Visit &middot; OpenGov Field Insights 2026</title>
+  <title>India → US Customer Visit · OpenGov Field Insights 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet" />
@@ -440,7 +440,7 @@
     .status-badge.noted { background: var(--bg-section); color: var(--text-dim); }
     .status-badge.prioritised { background: var(--og-orange-light); color: var(--og-orange); }
 
-    /* Journey nav footer &mdash; lives OUTSIDE the scroll container */
+    /* Journey nav footer — lives OUTSIDE the scroll container */
     .journey-footer {
       display: none; /* hidden by default, shown when a stop is selected */
       flex-shrink: 0;
@@ -509,7 +509,7 @@
     }
     .tasks-count { font-size: 18px; font-weight: 800; color: var(--og-purple); }
 
-    /* Task items &mdash; view mode */
+    /* Task items — view mode */
     .task-item {
       display: flex; align-items: center; gap: 10px;
       padding: 9px 0; border-bottom: 1px solid var(--border-soft);
@@ -535,7 +535,7 @@
       font-size: 13px; color: var(--text-dim); font-style: italic;
     }
 
-    /* Task rows &mdash; edit mode */
+    /* Task rows — edit mode */
     .task-edit-row {
       display: flex; align-items: center; gap: 8px;
       padding: 6px 0; border-bottom: 1px solid var(--border-soft);
@@ -630,21 +630,21 @@
     <span class="hdr-tag">March 2026</span>
     <span class="hdr-pill" id="hdr-pill">Select a stop</span>
     <button class="manage-btn" id="manage-btn" onclick="openManageFeedback()" title="Edit feedback for this stop">
-      &#x270E; Manage Feedback
+      ✎ Manage Feedback
     </button>
   </div>
 </header>
 
 <!-- Edit mode banner (shown below header when editing) -->
 <div class="edit-banner" id="edit-banner">
-  <span class="edit-banner-label">&#x270E; &nbsp;Edit mode &mdash; changes auto-save when you switch stops</span>
-  <button class="edit-save-btn" onclick="lockEditing()">&#x2713; Done Editing</button>
+  <span class="edit-banner-label">✎ &nbsp;Edit mode — changes auto-save when you switch stops</span>
+  <button class="edit-save-btn" onclick="lockEditing()">✓ Done Editing</button>
 </div>
 
 <!-- Password modal -->
 <div class="pw-overlay hidden" id="pw-overlay">
   <div class="pw-modal">
-    <div class="pw-title">&#x1F512; Manage Feedback</div>
+    <div class="pw-title">🔒 Manage Feedback</div>
     <div class="pw-sub">Enter the editor password to unlock feedback editing for all stops.</div>
     <input class="pw-input" id="pw-input" type="password" placeholder="Password"
       onkeydown="if(event.key==='Enter') checkPassword()" />
@@ -698,7 +698,7 @@
         <!-- Summary -->
         <div class="summary-block">
           <div class="section-heading sh-summary">Visit Summary</div>
-          <p class="summary-text" id="summary-text">&mdash;</p>
+          <p class="summary-text" id="summary-text">—</p>
         </div>
 
         <!-- 3-col grid -->
@@ -707,7 +707,7 @@
           <div class="insight-col col-well">
             <div class="col-header">
               <span class="col-title ct-well">What Went Well</span>
-              <span class="col-count cc-well" id="count-well">&mdash;</span>
+              <span class="col-count cc-well" id="count-well">—</span>
             </div>
             <div id="items-well"></div>
           </div>
@@ -715,7 +715,7 @@
           <div class="insight-col col-gap">
             <div class="col-header">
               <span class="col-title ct-gap">Gaps Identified</span>
-              <span class="col-count cc-gap" id="count-gaps">&mdash;</span>
+              <span class="col-count cc-gap" id="count-gaps">—</span>
             </div>
             <div id="items-gaps"></div>
           </div>
@@ -723,7 +723,7 @@
           <div class="insight-col col-suggestion">
             <div class="col-header">
               <span class="col-title ct-suggestion">Suggestions & Ideas</span>
-              <span class="col-count cc-suggestion" id="count-suggestions">&mdash;</span>
+              <span class="col-count cc-suggestion" id="count-suggestions">—</span>
             </div>
             <div id="items-suggestions"></div>
           </div>
@@ -733,7 +733,7 @@
         <div class="tasks-section" id="tasks-section">
           <div class="tasks-section-header">
             <span class="section-heading sh-tasks" style="margin-bottom:0">Tasks</span>
-            <span class="tasks-count" id="tasks-count">&mdash;</span>
+            <span class="tasks-count" id="tasks-count">—</span>
           </div>
           <div id="tasks-view"></div>
         </div>
@@ -748,11 +748,11 @@
 
   </div><!-- /content-area -->
 
-  <!-- Footer nav &mdash; outside scroll area so it never gets buried -->
+  <!-- Footer nav — outside scroll area so it never gets buried -->
   <div class="journey-footer" id="journey-footer">
-    <button class="jnav-btn" id="btn-prev" onclick="stepStop(-1)">&larr; Previous</button>
+    <button class="jnav-btn" id="btn-prev" onclick="stepStop(-1)">← Previous</button>
     <div class="progress-row" id="progress-row"></div>
-    <button class="jnav-btn primary" id="btn-next" onclick="stepStop(1)">Next &rarr;</button>
+    <button class="jnav-btn primary" id="btn-next" onclick="stepStop(1)">Next →</button>
   </div>
 
 </div><!-- /page -->
@@ -765,7 +765,7 @@ const stops = [
   {
     id: 0, type: "origin",
     name: "Pune", subtitle: "Maharashtra, India",
-    lat: 18.5204, lng: 73.8567, emoji: "&#x1F3E0;",
+    lat: 18.5204, lng: 73.8567, emoji: "🏠",
     heroGradient: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
     summary: "Starting point of the journey. Flew from Pune International Airport to Cincinnati, KY to begin the US private preview customer tour.",
     wentWell: [], gaps: [], suggestions: []
@@ -773,54 +773,54 @@ const stops = [
   {
     id: 1, type: "customer", stopNum: 1,
     name: "Boone County", subtitle: "Florence / Burlington", state: "Kentucky",
-    lat: 38.978, lng: -84.719, emoji: "&#x1F3DB;",
+    lat: 38.978, lng: -84.719, emoji: "🏛",
     heroGradient: "linear-gradient(135deg, #1e1b4b 0%, #4B3FFF 100%)",
-    summary: "Met with the Boone County finance team for a private preview of the new Financials capabilities. Their biggest long-standing pain point has been the inability to configure their state-recommended Chart of Accounts, which forced workarounds, created reporting inefficiencies, and made day-to-day operations harder than they should be. The preview addressed this directly and generated strong positive momentum. They engaged in detail across COA, account security, journal entries, continuous close, and allocation &mdash; providing clear, specific feedback throughout. Overall sentiment was confident and aligned with the direction of the product.",
+    summary: "Met with the Boone County finance team for a private preview of the new Financials capabilities. Their biggest long-standing pain point has been the inability to configure their state-recommended Chart of Accounts, which forced workarounds, created reporting inefficiencies, and made day-to-day operations harder than they should be. The preview addressed this directly and generated strong positive momentum. They engaged in detail across COA, account security, journal entries, continuous close, and allocation — providing clear, specific feedback throughout. Overall sentiment was confident and aligned with the direction of the product.",
     wentWell: [
-      "New COA capabilities met and exceeded their expectations &mdash; they were able to configure their state-recommended structure exactly as required, eliminating prior workarounds entirely. This was the most impactful moment of the visit and a key reason cited for moving forward.",
-      "Account security and valid code combination controls strongly resonated &mdash; they have an ongoing issue with departments miscoding transactions leading to budget inaccuracies and correction overhead, and these features are seen as a direct, practical solution.",
-      "Journal entry experience was well received by the accounting team &mdash; particularly description-based account code search and undo functionality, which reduce effort and improve accuracy during data entry.",
-      "Continuous close capability was strongly appreciated &mdash; it directly removes year-end closure pressure, reduces reliance on manual journal entries during close, and keeps financials in a near real-time state. Seen as a meaningful operational shift.",
+      "New COA capabilities met and exceeded their expectations — they were able to configure their state-recommended structure exactly as required, eliminating prior workarounds entirely. This was the most impactful moment of the visit and a key reason cited for moving forward.",
+      "Account security and valid code combination controls strongly resonated — they have an ongoing issue with departments miscoding transactions leading to budget inaccuracies and correction overhead, and these features are seen as a direct, practical solution.",
+      "Journal entry experience was well received by the accounting team — particularly description-based account code search and undo functionality, which reduce effort and improve accuracy during data entry.",
+      "Continuous close capability was strongly appreciated — it directly removes year-end closure pressure, reduces reliance on manual journal entries during close, and keeps financials in a near real-time state. Seen as a meaningful operational shift.",
       "Fiscal calendar configuration aligned with their expectations without concerns. Overall they left the session engaged and confident in the product direction."
     ],
     gaps: [
-      "Attribute hyperlinking to subledgers is incomplete &mdash; only a limited number of attributes are currently clickable. They expect all attributes within a journal entry to link directly to the corresponding subledger record for a frictionless GL-to-subledger experience.",
-      "Attachments are not directly accessible from within journal entries &mdash; users must navigate to the subledger to view them. This creates friction for audit readiness and review workflows; invoice documents should be visible directly on the journal entry screen.",
+      "Attribute hyperlinking to subledgers is incomplete — only a limited number of attributes are currently clickable. They expect all attributes within a journal entry to link directly to the corresponding subledger record for a frictionless GL-to-subledger experience.",
+      "Attachments are not directly accessible from within journal entries — users must navigate to the subledger to view them. This creates friction for audit readiness and review workflows; invoice documents should be visible directly on the journal entry screen.",
       "Allocation engine is limited to fixed percentages, which does not meet their needs. They require balance-driven allocation methods including average balance over a period and point-in-time balance as of a specific date.",
-      "All existing financial reports must be available in the new system &mdash; they rely heavily on current reports and expect full continuity with equal or better capability, not replacements."
+      "All existing financial reports must be available in the new system — they rely heavily on current reports and expect full continuity with equal or better capability, not replacements."
     ],
     suggestions: [
-      "Make all attributes within journal entries clickable, with each linking directly to its corresponding subledger record &mdash; a connected experience that eliminates friction when moving between GL and subledgers.",
+      "Make all attributes within journal entries clickable, with each linking directly to its corresponding subledger record — a connected experience that eliminates friction when moving between GL and subledgers.",
       "Surface attachments directly within the journal entry screen so invoice documents and supporting files are accessible without navigating away to the subledger.",
-      "Ensure all attachments are fully migrated and remain correctly linked during the upgrade &mdash; this is a firm requirement alongside continuity of budgeting data and historical audit trails.",
-      "Expand the allocation engine to support configurable, balance-driven allocation rules &mdash; including average balance-based and point-in-time balance methods &mdash; in addition to fixed percentages, with flexibility to define additional balance-driven drivers."
+      "Ensure all attachments are fully migrated and remain correctly linked during the upgrade — this is a firm requirement alongside continuity of budgeting data and historical audit trails.",
+      "Expand the allocation engine to support configurable, balance-driven allocation rules — including average balance-based and point-in-time balance methods — in addition to fixed percentages, with flexibility to define additional balance-driven drivers."
     ]
   },
   {
     id: 2, type: "customer", stopNum: 2,
     name: "Tuscaloosa", subtitle: "Birmingham / Tuscaloosa", state: "Alabama",
-    lat: 33.2098, lng: -87.5692, emoji: "&#x1F3D9;",
+    lat: 33.2098, lng: -87.5692, emoji: "🏙",
     heroGradient: "linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)",
-    summary: "[ Describe the Tuscaloosa visit &mdash; who you met, key conversation themes, and overall sentiment. What stage of adoption are they at, and what are their top priorities? ]",
+    summary: "[ Describe the Tuscaloosa visit — who you met, key conversation themes, and overall sentiment. What stage of adoption are they at, and what are their top priorities? ]",
     wentWell: [
-      "[ Add what went well &mdash; e.g., 'Stakeholders were enthusiastic about the new budgeting module' ]",
+      "[ Add what went well — e.g., 'Stakeholders were enthusiastic about the new budgeting module' ]",
       "[ Add another highlight ]"
     ],
     gaps: [
-      "[ Add a gap &mdash; e.g., 'Integration with legacy system was a recurring concern' ]",
+      "[ Add a gap — e.g., 'Integration with legacy system was a recurring concern' ]",
       "[ Add another gap ]"
     ],
     suggestions: [
-      "[ Add a suggestion &mdash; e.g., 'Requested a training sandbox environment for new staff' ]",
+      "[ Add a suggestion — e.g., 'Requested a training sandbox environment for new staff' ]",
       "[ Add another suggestion ]"
     ]
   },
   {
     id: 3, type: "customer", stopNum: 3,
     name: "Liberty City", subtitle: "Liberty", state: "Missouri",
-    lat: 39.246, lng: -94.419, emoji: "&#x1F3DB;",
+    lat: 39.246, lng: -94.419, emoji: "🏛",
     heroGradient: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
-    summary: "[ Describe the Liberty City, Missouri visit &mdash; context, stakeholders, and overall tone. Are they an existing customer, prospect, or renewal? ]",
+    summary: "[ Describe the Liberty City, Missouri visit — context, stakeholders, and overall tone. Are they an existing customer, prospect, or renewal? ]",
     wentWell: [
       "[ Add what went well ]",
       "[ Add another highlight ]"
@@ -837,9 +837,9 @@ const stops = [
   {
     id: 4, type: "customer", stopNum: 4,
     name: "Parker County District Hospital", subtitle: "Weatherford", state: "Texas",
-    lat: 32.758, lng: -97.797, emoji: "&#x1F3E5;",
+    lat: 32.758, lng: -97.797, emoji: "🏥",
     heroGradient: "linear-gradient(135deg, #431407 0%, #c2410c 100%)",
-    summary: "[ Describe the Parker County District Hospital visit &mdash; context, key stakeholders (IT, finance, admin?), and overall discussion themes. ]",
+    summary: "[ Describe the Parker County District Hospital visit — context, key stakeholders (IT, finance, admin?), and overall discussion themes. ]",
     wentWell: [
       "[ Add what went well ]",
       "[ Add another highlight ]"
@@ -856,9 +856,9 @@ const stops = [
   {
     id: 5, type: "customer", stopNum: 5,
     name: "Town of Northlake", subtitle: "Northlake (DFW)", state: "Texas",
-    lat: 33.075, lng: -97.284, emoji: "&#x1F3D8;",
+    lat: 33.075, lng: -97.284, emoji: "🏘",
     heroGradient: "linear-gradient(135deg, #312e81 0%, #7c3aed 100%)",
-    summary: "[ Describe the Town of Northlake visit &mdash; who you met, scale of the municipality, current product usage, and key themes from the discussion. ]",
+    summary: "[ Describe the Town of Northlake visit — who you met, scale of the municipality, current product usage, and key themes from the discussion. ]",
     wentWell: [ "[ Add what went well ]", "[ Add another highlight ]" ],
     gaps: [ "[ Add a gap identified ]" ],
     suggestions: [ "[ Add a suggestion from Northlake ]" ]
@@ -866,9 +866,9 @@ const stops = [
   {
     id: 6, type: "customer", stopNum: 6,
     name: "City of Grapevine", subtitle: "Grapevine (DFW)", state: "Texas",
-    lat: 32.934, lng: -97.078, emoji: "&#x1F347;",
+    lat: 32.934, lng: -97.078, emoji: "🍇",
     heroGradient: "linear-gradient(135deg, #3b0764 0%, #7e22ce 100%)",
-    summary: "[ Describe the Grapevine visit &mdash; context, key stakeholders, product usage maturity, and overall impression. ]",
+    summary: "[ Describe the Grapevine visit — context, key stakeholders, product usage maturity, and overall impression. ]",
     wentWell: [ "[ Add what went well ]", "[ Add another highlight ]" ],
     gaps: [ "[ Add a gap identified ]" ],
     suggestions: [ "[ Add a suggestion from Grapevine ]" ]
@@ -905,7 +905,7 @@ const map = L.map('map', {
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd', maxZoom: 18
 }).addTo(map);
-L.control.attribution({ position: 'bottomright', prefix: '&copy; OpenStreetMap &middot; CARTO' }).addTo(map);
+L.control.attribution({ position: 'bottomright', prefix: '© OpenStreetMap · CARTO' }).addTo(map);
 
 // -----------------------------------------
 //  ROUTE LINE
@@ -916,7 +916,7 @@ function updateRouteLine(toId) {
   // Remove old line
   if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
 
-  // Build ordered path: origin (0) &rarr; all customer stops up to toId
+  // Build ordered path: origin (0) → all customer stops up to toId
   const path = [];
   for (let i = 0; i <= toId; i++) {
     if (stops[i]) path.push([stops[i].lat, stops[i].lng]);
@@ -941,7 +941,7 @@ stops.forEach(stop => {
   const bg     = isOrigin ? '#ecfdf5' : '#ede9ff';
   const border = isOrigin ? '#17b26a' : '#4B3FFF';
   const txt    = isOrigin ? '#17b26a' : '#4B3FFF';
-  const label  = isOrigin ? '&#x1F3E0;' : stop.stopNum;
+  const label  = isOrigin ? '🏠' : stop.stopNum;
   const size   = 32;
 
   const icon = L.divIcon({
@@ -1014,20 +1014,20 @@ let currentStopId = null;
 
 function countReal(arr) {
   const n = (arr || []).filter(x => !isPh(x)).length;
-  return n > 0 ? n : '&mdash;';
+  return n > 0 ? n : '—';
 }
 
 // -- VIEW MODE: render items --
 function buildItems(arr, dotColor, hasStatus) {
   if (!arr || arr.length === 0)
-    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">&mdash;</span><span>Nothing recorded yet.</span></div>`;
+    return `<div class="insight-item"><span class="item-dot" style="color:${dotColor}">—</span><span>Nothing recorded yet.</span></div>`;
   return arr.map(item => {
     const text = itemText(item);
     const status = hasStatus ? itemStatus(item) : null;
     const badge = (status && !isPh(item))
       ? `<span class="status-badge ${status.toLowerCase()}">${status}</span>` : '';
     return `<div class="insight-item ${isPh(item) ? '' : 'filled'}">
-       <span class="item-dot" style="color:${dotColor}">&bull;</span>
+       <span class="item-dot" style="color:${dotColor}">•</span>
        <span>${text}${badge}</span>
      </div>`;
   }).join('');
@@ -1072,7 +1072,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
 
     const del = document.createElement('button');
     del.className = 'edit-delete-btn';
-    del.innerHTML = '&times;';
+    del.innerHTML = '×';
     del.title = 'Remove this item';
     del.addEventListener('click', () => { row.remove(); });
     row.appendChild(del);
@@ -1091,7 +1091,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
     newInput.className = 'edit-item-input';
     newInput.rows = 2;
     newInput.dataset.field = containerId;
-    newInput.placeholder = 'Enter text&hellip;';
+    newInput.placeholder = 'Enter text…';
     newRow.appendChild(newInput);
     if (hasStatus) {
       const sel = document.createElement('select');
@@ -1106,7 +1106,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
       newRow.appendChild(sel);
     }
     const del2 = document.createElement('button');
-    del2.className = 'edit-delete-btn'; del2.innerHTML = '&times;';
+    del2.className = 'edit-delete-btn'; del2.innerHTML = '×';
     del2.addEventListener('click', () => newRow.remove());
     newRow.appendChild(del2);
     container.insertBefore(newRow, addBtn);
@@ -1115,7 +1115,7 @@ function buildItemsEdit(arr, containerId, hasStatus) {
   container.appendChild(addBtn);
 }
 
-// -- COLLECT EDITS FROM DOM &rarr; save to stops array --
+// -- COLLECT EDITS FROM DOM → save to stops array --
 function saveCurrentEdits() {
   if (!editMode || currentStopId === null) return;
   const stop = stops[currentStopId];
@@ -1152,7 +1152,7 @@ function saveCurrentEdits() {
 
 // -- RENDER CURRENT STOP IN EDIT MODE --
 function renderEditMode(stop) {
-  // Summary &rarr; textarea
+  // Summary → textarea
   const summaryBlock = document.querySelector('.summary-block');
   const existingP = document.getElementById('summary-text');
   if (existingP) existingP.style.display = 'none';
@@ -1171,10 +1171,10 @@ function renderEditMode(stop) {
   buildItemsEdit(stop.gaps,        'items-gaps',        true);
   buildItemsEdit(stop.suggestions, 'items-suggestions', true);
 
-  // Update counts live &mdash; not critical in edit mode, just clear them
-  document.getElementById('count-well').textContent        = '&#x270E;';
-  document.getElementById('count-gaps').textContent        = '&#x270E;';
-  document.getElementById('count-suggestions').textContent = '&#x270E;';
+  // Update counts live — not critical in edit mode, just clear them
+  document.getElementById('count-well').textContent        = '✎';
+  document.getElementById('count-gaps').textContent        = '✎';
+  document.getElementById('count-suggestions').textContent = '✎';
   renderTasksEdit(stop);
 }
 
@@ -1234,7 +1234,7 @@ function checkPassword() {
 
 function enableEditing() {
   editMode = true;
-  document.getElementById('manage-btn').textContent  = '&#x2713; Done Editing';
+  document.getElementById('manage-btn').textContent  = '✓ Done Editing';
   document.getElementById('manage-btn').classList.add('active');
   document.getElementById('edit-banner').classList.add('visible');
   if (currentStopId !== null) renderEditMode(stops[currentStopId]);
@@ -1243,14 +1243,14 @@ function enableEditing() {
 function lockEditing() {
   saveCurrentEdits();
   editMode = false;
-  document.getElementById('manage-btn').textContent = '&#x270E; Manage Feedback';
+  document.getElementById('manage-btn').textContent = '✎ Manage Feedback';
   document.getElementById('manage-btn').classList.remove('active');
   document.getElementById('edit-banner').classList.remove('visible');
   if (currentStopId !== null) renderViewMode(stops[currentStopId]);
 }
 
 // -----------------------------------------
-//  TASKS &mdash; VIEW MODE
+//  TASKS — VIEW MODE
 // -----------------------------------------
 function renderTasksView(stop) {
   const container = document.getElementById('tasks-view');
@@ -1262,12 +1262,12 @@ function renderTasksView(stop) {
 
   if (tasks.length === 0) {
     container.innerHTML = `<div class="tasks-empty">No tasks yet. Click Manage Feedback to add tasks for this stop.</div>`;
-    if (countEl) countEl.textContent = '&mdash;';
+    if (countEl) countEl.textContent = '—';
     return;
   }
 
   const openCount = tasks.filter(t => t.status !== 'done').length;
-  if (countEl) countEl.textContent = openCount > 0 ? openCount : '&#x2713;';
+  if (countEl) countEl.textContent = openCount > 0 ? openCount : '✓';
 
   let html = '';
   tasks.forEach(task => {
@@ -1277,10 +1277,10 @@ function renderTasksView(stop) {
       const d = new Date(task.dueDate + 'T00:00:00');
       const fmt = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       const isOverdue = !done && d < today;
-      duePill = `<span class="task-due-tag${isOverdue ? ' overdue' : ''}">${isOverdue ? '&#x26A0; ' : ''}${fmt}</span>`;
+      duePill = `<span class="task-due-tag${isOverdue ? ' overdue' : ''}">${isOverdue ? '⚠ ' : ''}${fmt}</span>`;
     }
     html += `<div class="task-item ${done ? 'done' : ''}">
-      <div class="task-checkbox">${done ? '&#x2713;' : ''}</div>
+      <div class="task-checkbox">${done ? '✓' : ''}</div>
       <span class="task-text">${task.text}</span>
       ${duePill}
     </div>`;
@@ -1289,13 +1289,13 @@ function renderTasksView(stop) {
 }
 
 // -----------------------------------------
-//  TASKS &mdash; EDIT MODE
+//  TASKS — EDIT MODE
 // -----------------------------------------
 function renderTasksEdit(stop) {
   const container = document.getElementById('tasks-view');
   const countEl   = document.getElementById('tasks-count');
   if (!container) return;
-  if (countEl) countEl.textContent = '&#x270E;';
+  if (countEl) countEl.textContent = '✎';
 
   const tasks = stop.tasks || [];
   container.innerHTML = '';
@@ -1304,18 +1304,18 @@ function renderTasksEdit(stop) {
     const row = document.createElement('div');
     row.className = 'task-edit-row';
 
-    // Status toggle: todo &harr; done
+    // Status toggle: todo ↔ done
     const statusBtn = document.createElement('button');
     const status0 = task ? task.status : 'todo';
     statusBtn.dataset.status = status0;
     statusBtn.className = 'task-status-toggle ' + status0;
-    statusBtn.textContent = status0 === 'done' ? '&#x2713;' : '';
+    statusBtn.textContent = status0 === 'done' ? '✓' : '';
     statusBtn.title = 'Toggle done';
     statusBtn.addEventListener('click', () => {
       const next = statusBtn.dataset.status === 'done' ? 'todo' : 'done';
       statusBtn.dataset.status = next;
       statusBtn.className = 'task-status-toggle ' + next;
-      statusBtn.textContent = next === 'done' ? '&#x2713;' : '';
+      statusBtn.textContent = next === 'done' ? '✓' : '';
       textInput.className = 'task-edit-text' + (next === 'done' ? ' done-text' : '');
     });
     row.appendChild(statusBtn);
@@ -1323,7 +1323,7 @@ function renderTasksEdit(stop) {
     const textInput = document.createElement('input');
     textInput.className = 'task-edit-text' + (status0 === 'done' ? ' done-text' : '');
     textInput.value = task ? task.text : '';
-    textInput.placeholder = 'Task description&hellip;';
+    textInput.placeholder = 'Task description…';
     row.appendChild(textInput);
 
     const dueDateInput = document.createElement('input');
@@ -1335,7 +1335,7 @@ function renderTasksEdit(stop) {
 
     const delBtn = document.createElement('button');
     delBtn.className = 'edit-delete-btn';
-    delBtn.innerHTML = '&times;';
+    delBtn.innerHTML = '×';
     delBtn.title = 'Remove task';
     delBtn.addEventListener('click', () => row.remove());
     row.appendChild(delBtn);
@@ -1360,7 +1360,7 @@ function renderTasksEdit(stop) {
 
     const textInput = document.createElement('input');
     textInput.className = 'task-add-input';
-    textInput.placeholder = 'Task description&hellip;';
+    textInput.placeholder = 'Task description…';
     row.appendChild(textInput);
 
     const dateInput = document.createElement('input');
@@ -1414,7 +1414,7 @@ function renderTasksEdit(stop) {
 }
 
 // -----------------------------------------
-//  TASKS &mdash; SAVE EDITS
+//  TASKS — SAVE EDITS
 // -----------------------------------------
 function saveTaskEdits() {
   if (currentStopId === null) return;
@@ -1451,7 +1451,7 @@ function selectStop(id) {
 
   // Header pill
   document.getElementById('hdr-pill').textContent =
-    stop.type === 'customer' ? `Stop ${stop.stopNum} of 6` : '&mdash;';
+    stop.type === 'customer' ? `Stop ${stop.stopNum} of 6` : '—';
 
   // Activate nav pill
   document.querySelectorAll('.stop-pill').forEach(p => p.classList.remove('active'));
@@ -1506,8 +1506,8 @@ function selectStop(id) {
   const nextBtn = document.getElementById('btn-next');
   prevBtn.disabled = !prev;
   nextBtn.disabled = !next;
-  prevBtn.innerHTML = prev ? `&larr; ${prev.name}` : '&larr; Previous';
-  nextBtn.innerHTML = next ? `${next.name} &rarr;` : 'Next &rarr;';
+  prevBtn.innerHTML = prev ? `← ${prev.name}` : '← Previous';
+  nextBtn.innerHTML = next ? `${next.name} →` : 'Next →';
 
   // Sync floating side buttons
   const sidePrev = document.getElementById('side-prev');
